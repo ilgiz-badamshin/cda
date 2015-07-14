@@ -1,10 +1,12 @@
 package ru.cg.cda.rest.dto;
 
+import java.util.List;
+
 /**
  * @author Badamshin
  */
 public class GroupDTO {
   public Long id;
   public String name;
-  public UserDTO[] Users;
+  public List<UserDTO> Users;
 }

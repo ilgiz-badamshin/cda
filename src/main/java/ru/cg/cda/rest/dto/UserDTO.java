@@ -13,6 +13,7 @@ public class UserDTO {
   public String workPhone;
   public String orgName;
   public String positionName;
+  public String avatarUrl;
   public Boolean isFavorite;
   public int status;
 }

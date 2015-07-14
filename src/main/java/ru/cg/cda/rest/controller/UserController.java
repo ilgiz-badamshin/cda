@@ -72,12 +72,12 @@ public class UserController {
   }
 
   /**
-   * Возвращает аватарку пользователя
+   * Возвращает аватарку по идентификатору пользователя
    *
-   * @return List<UserDTO>
+   * @return FileSystemResource
    */
-  @RequestMapping(value = "/avatar", method = RequestMethod.GET)
-  public FileSystemResource getAvatar() {
+  @RequestMapping(value = "/avatar/{userId}", method = RequestMethod.GET)
+  public FileSystemResource getAvatar(@PathVariable("userId") Long userId) {
     return null;
   }
 

@@ -2,7 +2,6 @@ package ru.cg.cda.rest.controller;
 
 import java.util.List;
 
-import com.wordnik.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +12,6 @@ import ru.cg.cda.rest.dto.GroupDTO;
 /**
  * @author Badamshin
  */
-@Api
 @RestController
 @RequestMapping("/rest/group")
 public class GroupController {

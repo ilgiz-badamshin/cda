@@ -2,6 +2,7 @@ package ru.cg.cda.rest.controller;
 
 import java.util.List;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,6 +68,16 @@ public class UserController {
    */
   @RequestMapping(value = "/favorite/{userId}", method = RequestMethod.DELETE)
   public Boolean removeFavorite(@PathVariable("userId") Long userId) {
+    return null;
+  }
+
+  /**
+   * Возвращает аватарку пользователя
+   *
+   * @return List<UserDTO>
+   */
+  @RequestMapping(value = "/avatar", method = RequestMethod.GET)
+  public FileSystemResource getAvatar() {
     return null;
   }
 

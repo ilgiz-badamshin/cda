@@ -5,5 +5,6 @@ package ru.cg.cda.rest.enums;
  */
 public enum CallType {
   INCOMINT,
-  OUTGOINT
+  OUTGOINT ,
+  MISSED
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <aop:aspectj-autoproxy/>
+
+  <bean id="accessLevelDao" class="ru.cg.cda.database.dao.AccessLevelDaoImpl"/>
+  <bean id="accessToGroupDao" class="ru.cg.cda.database.dao.AccessToGroupDaoImpl"/>
+  <bean id="baseDao" class="ru.cg.cda.database.dao.BaseDaoImpl"/>
+  <bean id="favoriteDao" class="ru.cg.cda.database.dao.FavoriteDaoImpl"/>
+  <bean id="groupDao" class="ru.cg.cda.database.dao.GroupDaoImpl"/>
+  <bean id="historyDao" class="ru.cg.cda.database.dao.HistoryDaoImpl"/>
+  <bean id="linkUserRoleDao" class="ru.cg.cda.database.dao.LinkUserRoleDaoImpl"/>
+  <bean id="roleDao" class="ru.cg.cda.database.dao.RoleDaoImpl"/>
+  <bean id="userDao" class="ru.cg.cda.database.dao.UserDaoImpl"/>
+
+  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="java:/CdaDS"/>
+  </bean>
+
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="annotatedClasses">
+      <list>
+        <value>ru.cg.cda.database.bean.AccessLevel</value>
+        <value>ru.cg.cda.database.bean.AccessToGroup</value>
+        <value>ru.cg.cda.database.bean.Favorite</value>
+        <value>ru.cg.cda.database.bean.Group</value>
+        <value>ru.cg.cda.database.bean.History</value>
+        <value>ru.cg.cda.database.bean.LinkUserRole</value>
+        <value>ru.cg.cda.database.bean.Role</value>
+        <value>ru.cg.cda.database.bean.User</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+        <prop key="show_sql">true</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+  <tx:annotation-driven transaction-manager="txManager"/>
+
+</beans>

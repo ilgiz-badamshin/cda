@@ -23,7 +23,7 @@ public class HistoryController {
    *
    * @return Long
    */
-  @RequestMapping(value = "/count", method = RequestMethod.GET)
+  @RequestMapping(value = "список", method = RequestMethod.GET)
   public Long getHistoryCount() {
     return historyService.getHistoryCount();
   }

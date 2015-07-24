@@ -139,5 +139,5 @@ ALTER TABLE "history" ADD CONSTRAINT history_fk1 FOREIGN KEY (caller_id) REFEREN
 
 
 
-ALTER TABLE "favoriteUser" ADD CONSTRAINT favorite_fk0 FOREIGN KEY (user_id) REFERENCES "user" (id);
-ALTER TABLE "favoriteUser" ADD CONSTRAINT favorite_fk1 FOREIGN KEY (favorite_id) REFERENCES "user" (id);
+ALTER TABLE "favorite" ADD CONSTRAINT favorite_fk0 FOREIGN KEY (user_id) REFERENCES "user" (id);
+ALTER TABLE "favorite" ADD CONSTRAINT favorite_fk1 FOREIGN KEY (favorite_id) REFERENCES "user" (id);

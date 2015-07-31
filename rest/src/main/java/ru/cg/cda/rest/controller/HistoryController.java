@@ -23,7 +23,7 @@ public class HistoryController {
    *
    * @return Long
    */
-  @RequestMapping(value = "список", method = RequestMethod.GET)
+  @RequestMapping(value = "/count", method = RequestMethod.GET)
   public Long getHistoryCount() {
     return historyService.getHistoryCount();
   }
@@ -81,7 +81,7 @@ public class HistoryController {
    *
    * @param historyDTO HistoryDTO
    */
-  @RequestMapping(value = "/", method = RequestMethod.POST)
+  @RequestMapping(value = "", method = RequestMethod.POST)
   public void addHistory(@RequestBody HistoryDTO historyDTO) {
     historyService.addHistory(historyDTO);
   }

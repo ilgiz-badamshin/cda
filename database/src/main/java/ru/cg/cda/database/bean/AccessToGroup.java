@@ -12,6 +12,8 @@ public class AccessToGroup {
   private Long roleId;
   private Long groupId;
   private Long accessLevelId;
+  private Role role;
+  private Group group;
 
 
   @Id
@@ -50,5 +52,25 @@ public class AccessToGroup {
 
   public void setAccessLevelId(Long accessLevelId) {
     this.accessLevelId = accessLevelId;
+  }
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "role_id", insertable = false, updatable = false)
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "group_id", insertable = false, updatable = false)
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
   }
 }

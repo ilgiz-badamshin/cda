@@ -19,6 +19,7 @@
   <bean id="groupDao" class="ru.cg.cda.database.dao.GroupDaoImpl"/>
   <bean id="historyDao" class="ru.cg.cda.database.dao.HistoryDaoImpl"/>
   <bean id="linkUserRoleDao" class="ru.cg.cda.database.dao.LinkUserRoleDaoImpl"/>
+  <bean id="paramsDao" class="ru.cg.cda.database.dao.ParamsDaoImpl"/>
   <bean id="roleDao" class="ru.cg.cda.database.dao.RoleDaoImpl"/>
   <bean id="userDao" class="ru.cg.cda.database.dao.UserDaoImpl"/>
 
@@ -36,6 +37,7 @@
         <value>ru.cg.cda.database.bean.Group</value>
         <value>ru.cg.cda.database.bean.History</value>
         <value>ru.cg.cda.database.bean.LinkUserRole</value>
+        <value>ru.cg.cda.database.bean.Params</value>
         <value>ru.cg.cda.database.bean.Role</value>
         <value>ru.cg.cda.database.bean.User</value>
       </list>

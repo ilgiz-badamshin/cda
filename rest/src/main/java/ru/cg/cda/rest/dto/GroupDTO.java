@@ -1,5 +1,6 @@
 package ru.cg.cda.rest.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
 public class GroupDTO {
   private Long id;
   private String name;
-  private List<UserDTO> Users;
+  private List<UserDTO> Users = new ArrayList<>();
 
   public Long getId() {
     return id;

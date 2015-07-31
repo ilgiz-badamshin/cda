@@ -1,6 +1,7 @@
 package ru.cg.cda.rest.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,27 @@ public class UserServiceImpl implements UserService {
     return null;  //TODO: implement this method
   }
 
+  @Override
+  public List<UserDTO> changedUsers(Date updatedAt) {
+    List<User> users = userDao.changedUsers(RestParamStorage.getCurrrentUserId(), updatedAt);
+    return convertUsers(users);
+  }
+
+  @Override
+  public List<UserDTO> visibleUsers() {
+    List<User> users = userDao.visibleUsers(RestParamStorage.getCurrrentUserId());
+    return convertUsers(users);
+  }
+
+  @Override
+  public List<Long> invisibleIds() {
+    return userDao.getInvisibleIds(RestParamStorage.getCurrrentUserId());
+  }
+
+  @Override
+  public List<Long> invisibleIds(Date updatedAt) {
+    return userDao.getInvisibleIds(RestParamStorage.getCurrrentUserId(), updatedAt);
+  }
 
   public UserDTO convertUser(User user) {
     if (user == null) {

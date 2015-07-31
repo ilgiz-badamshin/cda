@@ -5,6 +5,6 @@ package ru.cg.cda.database.enums;
  */
 public enum CallType {
   INCOMING,
-  OUTGOINT,
+  OUTCOMING,
   MISSED
 }

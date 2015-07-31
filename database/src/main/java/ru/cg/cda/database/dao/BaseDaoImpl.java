@@ -56,7 +56,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<T> listByField(String fieldName, Object fieldValue,final int from, final int count) {
+  public List<T> listByField(String fieldName, Object fieldValue, final int from, final int count) {
     return create().add(Restrictions.eq(fieldName, fieldValue)).setFirstResult(from).setMaxResults(count).list();
   }
 

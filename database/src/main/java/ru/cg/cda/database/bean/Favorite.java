@@ -35,7 +35,6 @@ public class Favorite {
   }
 
   @Column(name = "favorite_id")
-
   public Long getFavoriteId() {
     return favoriteId;
   }

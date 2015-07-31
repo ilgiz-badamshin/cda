@@ -1,5 +1,6 @@
 package ru.cg.cda.database.bean;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "`user`")
 public class User {
   private Long id;
+  private String udsId;
   private Long groupId;
   private String userName;
   private String userUri;
@@ -21,6 +23,9 @@ public class User {
   private String workPhone;
   private String orgName;
   private String positionName;
+  private Date insertedAt;
+  private Date updatedAt;
+
   private List<User> favorites;
   private Group group;
 
@@ -33,6 +38,15 @@ public class User {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  @Column(name = "uds_id")
+  public String getUdsId() {
+    return udsId;
+  }
+
+  public void setUdsId(String udsId) {
+    this.udsId = udsId;
   }
 
   @Column(name = "group_id")
@@ -154,5 +168,25 @@ public class User {
 
   public void setGroup(Group group) {
     this.group = group;
+  }
+
+  @Column(name = "inserted_at", columnDefinition = "DATETIME")
+  @Temporal(TemporalType.TIMESTAMP)
+  public Date getInsertedAt() {
+    return insertedAt;
+  }
+
+  public void setInsertedAt(Date insertedAt) {
+    this.insertedAt = insertedAt;
+  }
+
+  @Column(name = "updated_at", columnDefinition = "DATETIME")
+  @Temporal(TemporalType.TIMESTAMP)
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
   }
 }

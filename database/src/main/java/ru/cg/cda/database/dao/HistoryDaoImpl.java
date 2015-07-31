@@ -3,6 +3,7 @@ package ru.cg.cda.database.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,20 @@ public class HistoryDaoImpl extends BaseDaoImpl<History> implements HistoryDao {
         .add(Restrictions.eq("callerId", callerId))
         .setFirstResult(from)
         .setMaxResults(count)
+        .addOrder(Order.desc("startOn"))
+        .addOrder(Order.desc("id"))
+        .list();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<History> listByField(String fieldName, Object fieldValue, final int from, final int count) {
+    return create()
+        .add(Restrictions.eq(fieldName, fieldValue))
+        .setFirstResult(from)
+        .setMaxResults(count)
+        .addOrder(Order.desc("startOn"))
+        .addOrder(Order.desc("id"))
         .list();
   }
 }

@@ -1,6 +1,5 @@
 package ru.cg.cda.rest.service;
 
-import java.util.Date;
 import java.util.List;
 
 import ru.cg.cda.database.bean.User;
@@ -22,13 +21,7 @@ public interface UserService {
 
   UserDTO getAvatar(Long userId);
 
-  List<UserDTO> changedUsers(Date updatedAt);
-
   List<Long> invisibleIds();
-
-  List<Long> invisibleIds(Date updatedAt);
-
-  List<UserDTO> visibleUsers();
 
   List<UserDTO> convertUsers(List<User> users);
 

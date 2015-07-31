@@ -1,6 +1,5 @@
 package ru.cg.cda.database.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import ru.cg.cda.database.bean.Group;
@@ -10,7 +9,9 @@ import ru.cg.cda.database.bean.Group;
  */
 public interface GroupDao extends BaseDao<Group> {
 
-  List<Group> visibleGroups(Long userId, Date updatedAt);
+  List<Group> visibleGroups(Long userId);
 
-  List<Long> getInvisibleIds(Long userId, Date updatedAt);
+  List<Long> visibleGroupIds(Long userId);
+
+  List<Long> invisibleIds(Long userId);
 }

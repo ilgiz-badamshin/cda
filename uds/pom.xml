@@ -22,10 +22,6 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
     </dependency>
-    <dependency>
-      <groupId>ru.cg.cda</groupId>
-      <artifactId>rest</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>com.google.code.gson</groupId>

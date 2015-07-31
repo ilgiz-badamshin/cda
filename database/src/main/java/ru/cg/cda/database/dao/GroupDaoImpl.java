@@ -1,6 +1,5 @@
 package ru.cg.cda.database.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -21,25 +20,24 @@ public class GroupDaoImpl extends BaseDaoImpl<Group> implements GroupDao {
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<Group> visibleGroups(Long userId, Date updatedAt) {
+  public List<Group> visibleGroups(Long userId) {
     List<Long> visibleIds = roleDao.visibleGroupIds(userId);
     Criteria criteria = create();
     criteria.add(Restrictions.in("id", visibleIds));
-    if (updatedAt != null) {
-      criteria.add(Restrictions.ge("updatedAt", updatedAt));
-    }
     return criteria.list();
+  }
+  @Override
+  @SuppressWarnings("unchecked")
+  public List<Long> visibleGroupIds(Long userId) {
+    return roleDao.visibleGroupIds(userId);
   }
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<Long> getInvisibleIds(Long userId, Date updatedAt) {
+  public List<Long> invisibleIds(Long userId) {
     List<Long> visibleIds = roleDao.visibleGroupIds(userId);
     Criteria criteria = create();
     criteria.add(Restrictions.not(Restrictions.in("id", visibleIds)));
-    if (updatedAt != null) {
-      criteria.add(Restrictions.ge("updatedAt", updatedAt));
-    }
     criteria.setProjection(Projections.property("id"));
     return criteria.list();
   }

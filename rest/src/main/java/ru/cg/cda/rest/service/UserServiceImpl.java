@@ -1,7 +1,6 @@
 package ru.cg.cda.rest.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.cg.cda.database.bean.Favorite;
 import ru.cg.cda.database.bean.User;
 import ru.cg.cda.database.dao.FavoriteDao;
+import ru.cg.cda.database.dao.RoleDao;
 import ru.cg.cda.database.dao.UserDao;
 import ru.cg.cda.rest.dto.UserDTO;
+import ru.cg.cda.rest.exception.UserAccessException;
 import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
@@ -24,14 +25,22 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserDao userDao;
+
+  @Autowired
+  private RoleDao roleDao;
   @Autowired
   private FavoriteDao favoriteDao;
 
   public UserDTO getUser(Long userId) {
+    List<Long> visibleIds = roleDao.visibleUserIds(userId);
+    if (visibleIds.contains(userId)) {
+      throw new UserAccessException("Нет прав на просмотр деталей пользователя");
+    }
     return convertUser(userDao.get(userId));
   }
 
   public List<UserDTO> getUsersByGroup(Long groupId) {
+    //@TODO
     return convertUsers(userDao.listByField("groupId", groupId));
   }
 
@@ -62,25 +71,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<UserDTO> changedUsers(Date updatedAt) {
-    List<User> users = userDao.changedUsers(RestParamStorage.getCurrrentUserId(), updatedAt);
-    return convertUsers(users);
-  }
-
-  @Override
-  public List<UserDTO> visibleUsers() {
-    List<User> users = userDao.visibleUsers(RestParamStorage.getCurrrentUserId());
-    return convertUsers(users);
-  }
-
-  @Override
   public List<Long> invisibleIds() {
     return userDao.getInvisibleIds(RestParamStorage.getCurrrentUserId());
-  }
-
-  @Override
-  public List<Long> invisibleIds(Date updatedAt) {
-    return userDao.getInvisibleIds(RestParamStorage.getCurrrentUserId(), updatedAt);
   }
 
   public UserDTO convertUser(User user) {
@@ -102,7 +94,6 @@ public class UserServiceImpl implements UserService {
     userDTO.setAvatarUrl("/rest/user/avatar/" + user.getId().toString());
     //@TODO сделать методы
     userDTO.setIsFavorite(favoriteDao.isFavorite(RestParamStorage.getCurrrentUserId(), user.getId()));
-//    userDTO.setAccessLevel(user.getFirstName());
     return userDTO;
   }
 

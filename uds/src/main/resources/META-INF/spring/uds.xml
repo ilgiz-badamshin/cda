@@ -9,7 +9,7 @@
 
   <context:annotation-config/>
   <context:component-scan base-package="ru.cg.cda.uds.*"/>
-  <context:property-placeholder location="classpath*:udsUrls.properties"/>
+  <context:property-placeholder location="classpath*:ru/cg/cda/uds/udsUrls.properties"/>
 
   <bean id="udsService" class="ru.cg.cda.uds.service.UdsServiceImpl"/>
 

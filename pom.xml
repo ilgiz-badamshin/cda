@@ -12,6 +12,7 @@
     <module>rest</module>
     <module>uds</module>
     <module>database</module>
+    <module>axl</module>
   </modules>
   <packaging>pom</packaging>
 

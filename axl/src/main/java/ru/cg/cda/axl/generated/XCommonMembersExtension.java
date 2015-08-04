@@ -1,0 +1,175 @@
+
+package ru.cg.cda.axl.generated;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for XCommonMembersExtension complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="XCommonMembersExtension">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "XCommonMembersExtension")
+@XmlSeeAlso({
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.RemoveUserRoles.class,
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.AddUserRoles.class,
+    ru.cg.cda.axl.generated.UpdateUserGroupReq.UserRoles.class,
+    ru.cg.cda.axl.generated.UpdateMobileVoiceAccessReq.RemoveLocales.class,
+    ru.cg.cda.axl.generated.UpdateMobileVoiceAccessReq.AddLocales.class,
+    ru.cg.cda.axl.generated.UpdateMobileVoiceAccessReq.Locales.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.RemovePatterns.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.AddPatterns.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.Patterns.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.RemovePlars.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.AddPlars.class,
+    ru.cg.cda.axl.generated.UpdateSipDialRulesReq.Plars.class,
+    ru.cg.cda.axl.generated.UpdateRouteFilterReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteFilterReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteFilterReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceListReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceListReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceListReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateLdapDirectoryReq.RemoveAccessControlGroupInfo.class,
+    ru.cg.cda.axl.generated.UpdateLdapDirectoryReq.AddAccessControlGroupInfo.class,
+    ru.cg.cda.axl.generated.UpdateLdapDirectoryReq.AccessControlGroupInfo.class,
+    ru.cg.cda.axl.generated.UpdateUserReq.RemoveExtensionsInfo.class,
+    ru.cg.cda.axl.generated.UpdateUserReq.AddExtensionsInfo.class,
+    ru.cg.cda.axl.generated.UpdateUserReq.ExtensionsInfo.class,
+    ru.cg.cda.axl.generated.UpdateRouteListReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteListReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteListReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateTimeScheduleReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateTimeScheduleReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateTimeScheduleReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateLineGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateLineGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateLineGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateCcdRequestingServiceReq.RemoveAssociatedTrunks.class,
+    ru.cg.cda.axl.generated.UpdateCcdRequestingServiceReq.AddAssociatedTrunks.class,
+    ru.cg.cda.axl.generated.UpdateCcdRequestingServiceReq.AssociatedTrunks.class,
+    ru.cg.cda.axl.generated.UpdateResourcePriorityNamespaceListReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateResourcePriorityNamespaceListReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateResourcePriorityNamespaceListReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateHuntListReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateHuntListReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateHuntListReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateMediaResourceGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateDateTimeGroupReq.RemovePhoneNtpReferences.class,
+    ru.cg.cda.axl.generated.UpdateDateTimeGroupReq.AddPhoneNtpReferences.class,
+    ru.cg.cda.axl.generated.UpdateDateTimeGroupReq.PhoneNtpReferences.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.RemoveCcmExternalIpMaps.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.AddCcmExternalIpMaps.class,
+    ru.cg.cda.axl.generated.UpdateImeClientReq.CcmExternalIpMaps.class,
+    ru.cg.cda.axl.generated.UpdateSipTrunkReq.RemoveDestinations.class,
+    ru.cg.cda.axl.generated.UpdateSipTrunkReq.AddDestinations.class,
+    ru.cg.cda.axl.generated.UpdateSipTrunkReq.Destinations.class,
+    ru.cg.cda.axl.generated.UpdateDeviceMobilityReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateDeviceMobilityReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateDeviceMobilityReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateLbmHubGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateLbmHubGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateLbmHubGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateGeoLocationPolicyReq.RemoveRelatedPolicies.class,
+    ru.cg.cda.axl.generated.UpdateGeoLocationPolicyReq.AddRelatedPolicies.class,
+    ru.cg.cda.axl.generated.UpdateGeoLocationPolicyReq.RelatedPolicies.class,
+    ru.cg.cda.axl.generated.UpdateCallerFilterListReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallerFilterListReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallerFilterListReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateIpPhoneServicesReq.RemoveParameters.class,
+    ru.cg.cda.axl.generated.UpdateIpPhoneServicesReq.AddParameters.class,
+    ru.cg.cda.axl.generated.UpdateIpPhoneServicesReq.Parameters.class,
+    ru.cg.cda.axl.generated.UpdateCssReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateCssReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateCssReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateSelfProvisioningReq.RemoveLanguages.class,
+    ru.cg.cda.axl.generated.UpdateSelfProvisioningReq.AddLanguages.class,
+    ru.cg.cda.axl.generated.UpdateSelfProvisioningReq.Languages.class,
+    ru.cg.cda.axl.generated.UpdateWlanProfileGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateWlanProfileGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateWlanProfileGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateCallManagerGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallManagerGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallManagerGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateCallPickupGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallPickupGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateCallPickupGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.RemoveAppUsers.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.AddAppUsers.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.AppUsers.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.RemoveEndUsers.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.AddEndUsers.class,
+    ru.cg.cda.axl.generated.UpdateApplicationServerReq.EndUsers.class,
+    ru.cg.cda.axl.generated.UpdateH323TrunkReq.RemoveDestinations.class,
+    ru.cg.cda.axl.generated.UpdateH323TrunkReq.AddDestinations.class,
+    ru.cg.cda.axl.generated.UpdateH323TrunkReq.Destinations.class,
+    ru.cg.cda.axl.generated.UpdateRouteGroupReq.RemoveMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteGroupReq.AddMembers.class,
+    ru.cg.cda.axl.generated.UpdateRouteGroupReq.Members.class,
+    ru.cg.cda.axl.generated.UpdateSafForwarderReq.RemoveAssociatedCucms.class,
+    ru.cg.cda.axl.generated.UpdateSafForwarderReq.AddAssociatedCucms.class,
+    ru.cg.cda.axl.generated.UpdateSafForwarderReq.AssociatedCucms.class,
+    ru.cg.cda.axl.generated.XUserGroup.Members.class,
+    ru.cg.cda.axl.generated.XUserGroup.UserRoles.class,
+    ru.cg.cda.axl.generated.XLdapDirectory.AccessControlGroupInfo.class,
+    ru.cg.cda.axl.generated.XDeviceMobility.Members.class,
+    ru.cg.cda.axl.generated.XCcdRequestingService.AssociatedTrunks.class,
+    ru.cg.cda.axl.generated.XGeoLocationPolicy.RelatedPolicies.class,
+    ru.cg.cda.axl.generated.XUser.ExtensionsInfo.class,
+    ru.cg.cda.axl.generated.XCallPickupGroup.Members.class,
+    ru.cg.cda.axl.generated.XResourcePriorityNamespaceList.Members.class,
+    ru.cg.cda.axl.generated.XRouteGroup.Members.class,
+    ru.cg.cda.axl.generated.XCallerFilterList.Members.class,
+    ru.cg.cda.axl.generated.XWlanProfileGroup.Members.class,
+    ru.cg.cda.axl.generated.XDateTimeGroup.PhoneNtpReferences.class,
+    ru.cg.cda.axl.generated.XHuntList.Members.class,
+    ru.cg.cda.axl.generated.XLineGroup.Members.class,
+    ru.cg.cda.axl.generated.XIpPhoneServices.Parameters.class,
+    ru.cg.cda.axl.generated.XApplicationServer.AppUsers.class,
+    ru.cg.cda.axl.generated.XApplicationServer.EndUsers.class,
+    ru.cg.cda.axl.generated.XImeClient.Members.class,
+    ru.cg.cda.axl.generated.XImeClient.CcmExternalIpMaps.class,
+    ru.cg.cda.axl.generated.XRouteList.Members.class,
+    ru.cg.cda.axl.generated.XMediaResourceList.Members.class,
+    ru.cg.cda.axl.generated.XSafForwarder.AssociatedCucms.class,
+    ru.cg.cda.axl.generated.XCss.Members.class,
+    ru.cg.cda.axl.generated.XCallManagerGroup.Members.class,
+    ru.cg.cda.axl.generated.XMobileVoiceAccess.Locales.class,
+    ru.cg.cda.axl.generated.XRouteFilter.Members.class,
+    ru.cg.cda.axl.generated.XDdi.Members.class,
+    ru.cg.cda.axl.generated.XH323Trunk.Destinations.class,
+    ru.cg.cda.axl.generated.XTimeSchedule.Members.class,
+    ru.cg.cda.axl.generated.XSdpTransparencyProfile.AttributeSet.class,
+    ru.cg.cda.axl.generated.XSipTrunk.Destinations.class,
+    ru.cg.cda.axl.generated.XMediaResourceGroup.Members.class,
+    ru.cg.cda.axl.generated.LLdapDirectory.AccessControlGroupInfo.class,
+    ru.cg.cda.axl.generated.XSipDialRules.Patterns.class,
+    ru.cg.cda.axl.generated.XSipDialRules.Plars.class,
+    ru.cg.cda.axl.generated.XLbmHubGroup.Members.class
+})
+public class XCommonMembersExtension {
+
+
+}

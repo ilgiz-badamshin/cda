@@ -1,5 +1,6 @@
 package ru.cg.cda.database.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -22,14 +23,12 @@ public class GroupDaoImpl extends BaseDaoImpl<Group> implements GroupDao {
   @SuppressWarnings("unchecked")
   public List<Group> visibleGroups(Long userId) {
     List<Long> visibleIds = roleDao.visibleGroupIds(userId);
+    if (visibleIds.size() == 0) {
+      return new ArrayList<>();
+    }
     Criteria criteria = create();
     criteria.add(Restrictions.in("id", visibleIds));
     return criteria.list();
-  }
-  @Override
-  @SuppressWarnings("unchecked")
-  public List<Long> visibleGroupIds(Long userId) {
-    return roleDao.visibleGroupIds(userId);
   }
 
   @Override
@@ -37,7 +36,9 @@ public class GroupDaoImpl extends BaseDaoImpl<Group> implements GroupDao {
   public List<Long> invisibleIds(Long userId) {
     List<Long> visibleIds = roleDao.visibleGroupIds(userId);
     Criteria criteria = create();
-    criteria.add(Restrictions.not(Restrictions.in("id", visibleIds)));
+    if (visibleIds.size() > 0) {
+      criteria.add(Restrictions.not(Restrictions.in("id", visibleIds)));
+    }
     criteria.setProjection(Projections.property("id"));
     return criteria.list();
   }

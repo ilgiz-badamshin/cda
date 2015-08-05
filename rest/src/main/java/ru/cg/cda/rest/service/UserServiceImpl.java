@@ -2,6 +2,7 @@ package ru.cg.cda.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import ru.cg.cda.database.dao.FavoriteDao;
 import ru.cg.cda.database.dao.RoleDao;
 import ru.cg.cda.database.dao.UserDao;
 import ru.cg.cda.rest.dto.UserDTO;
+import ru.cg.cda.rest.exception.GroupAccessException;
 import ru.cg.cda.rest.exception.UserAccessException;
 import ru.cg.cda.rest.storage.RestParamStorage;
 
@@ -25,7 +27,6 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserDao userDao;
-
   @Autowired
   private RoleDao roleDao;
   @Autowired
@@ -33,14 +34,17 @@ public class UserServiceImpl implements UserService {
 
   public UserDTO getUser(Long userId) {
     List<Long> visibleIds = roleDao.visibleUserIds(userId);
-    if (visibleIds.contains(userId)) {
+    if (!Objects.equals(userId, RestParamStorage.getCurrrentUserId()) && !visibleIds.contains(userId)) {
       throw new UserAccessException("Нет прав на просмотр деталей пользователя");
     }
     return convertUser(userDao.get(userId));
   }
 
   public List<UserDTO> getUsersByGroup(Long groupId) {
-    //@TODO
+    List<Long> visibleIds = roleDao.visibleGroupIds(RestParamStorage.getCurrrentUserId());
+    if (!visibleIds.contains(groupId)) {
+      throw new GroupAccessException("Нет доступа к группе");
+    }
     return convertUsers(userDao.listByField("groupId", groupId));
   }
 
@@ -101,6 +105,9 @@ public class UserServiceImpl implements UserService {
   public List<UserDTO> convertUsers(List<User> users) {
     List<UserDTO> result = new ArrayList<>();
     for (User user : users) {
+      if (Objects.equals(user.getId(), RestParamStorage.getCurrrentUserId())) {
+        continue;
+      }
       result.add(convertUser(user));
     }
     return result;

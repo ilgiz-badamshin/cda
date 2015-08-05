@@ -11,7 +11,5 @@ public interface GroupDao extends BaseDao<Group> {
 
   List<Group> visibleGroups(Long userId);
 
-  List<Long> visibleGroupIds(Long userId);
-
   List<Long> invisibleIds(Long userId);
 }

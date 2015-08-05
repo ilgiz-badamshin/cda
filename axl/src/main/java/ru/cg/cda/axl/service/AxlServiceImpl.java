@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.ws.BindingProvider;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import ru.cg.cda.axl.SSLUtil;
 import ru.cg.cda.axl.beans.AxlDevice;
@@ -18,6 +19,7 @@ import ru.cg.cda.axl.generated.*;
 /**
  * @author Badamshin
  */
+@Component
 public class AxlServiceImpl implements AxlService {
   @Value("${axl.username}")
   private String USERNAME;
@@ -51,9 +53,13 @@ public class AxlServiceImpl implements AxlService {
         List<LPhone> phones = listPhoneRes.getReturn().getPhone();
         for (LPhone lPhone : phones) {
           AxlDevice axlDevice = new AxlDevice();
-          axlDevice.setId(lPhone.getUuid());
-          axlDevice.setUserId(lPhone.getOwnerUserName().getUuid());
+          axlDevice.setId(lPhone.getUuid().replace("{", "").replace("}", ""));
+          if (lPhone.getOwnerUserName().getUuid() != null) {
+            axlDevice.setUserId(lPhone.getOwnerUserName().getUuid().replace("{", "").replace("}", ""));
+          }
           axlDevice.setName(lPhone.getName());
+          axlDevice.setDescription(lPhone.getDescription());
+          axlDevice.setModel(lPhone.getModel());
           axlDevices.add(axlDevice);
         }
       }
@@ -99,7 +105,7 @@ public class AxlServiceImpl implements AxlService {
         List<LUser> users = listUserRes.getReturn().getUser();
         for (LUser user : users) {
           AxlUser axlUser = new AxlUser();
-          axlUser.setId(user.getUuid());
+          axlUser.setId(user.getUuid().replace("{", "").replace("}", ""));
           axlUser.setUserName(user.getUserid());
           axlUser.setFirstName(user.getFirstName());
           axlUser.setLastName(user.getLastName());

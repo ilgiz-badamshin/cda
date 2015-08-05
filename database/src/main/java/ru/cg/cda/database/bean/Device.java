@@ -11,12 +11,14 @@ import javax.persistence.*;
 public class Device {
   private Long id;
   private String udsId;
+  private String udsUserId;
   private Long userId;
   private String name;
   private String description;
   private String model;
-  private Date createdAt;
   private Date insertedAt;
+  private Date updatedAt;
+  private Boolean deleted;
   private User user;
 
   @Id
@@ -37,6 +39,15 @@ public class Device {
 
   public void setUdsId(String udsId) {
     this.udsId = udsId;
+  }
+
+  @Column(name = "uds_user_id")
+  public String getUdsUserId() {
+    return udsUserId;
+  }
+
+  public void setUdsUserId(String udsUserId) {
+    this.udsUserId = udsUserId;
   }
 
   @Column(name = "user_id")
@@ -75,22 +86,33 @@ public class Device {
     this.model = model;
   }
 
-  @Column(name = "created_at")
-  public Date getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  @Column(name = "inserted_at")
+  @Column(name = "inserted_at", columnDefinition = "DATETIME")
+  @Temporal(TemporalType.TIMESTAMP)
   public Date getInsertedAt() {
     return insertedAt;
   }
 
   public void setInsertedAt(Date insertedAt) {
     this.insertedAt = insertedAt;
+  }
+
+  @Column(name = "updated_at", columnDefinition = "DATETIME")
+  @Temporal(TemporalType.TIMESTAMP)
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  @Column(name = "deleted")
+  public Boolean getDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
   }
 
   @ManyToOne(fetch = FetchType.LAZY)

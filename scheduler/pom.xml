@@ -23,10 +23,18 @@
       <groupId>ru.cg.cda</groupId>
       <artifactId>uds</artifactId>
     </dependency>
+    <dependency>
+      <groupId>ru.cg.cda</groupId>
+      <artifactId>axl</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
     </dependency>
 
     <dependency>

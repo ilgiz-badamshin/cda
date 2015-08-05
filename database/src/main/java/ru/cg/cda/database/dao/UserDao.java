@@ -13,4 +13,8 @@ public interface UserDao extends BaseDao<User> {
   User getByUdsId(String udsId);
 
   List<Long> getInvisibleIds(Long userId);
+
+  Integer deleteAll();
+
+  Integer deleteAllExcept(List<Long> skipIds);
 }

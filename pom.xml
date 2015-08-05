@@ -44,6 +44,11 @@
         <artifactId>uds</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>ru.cg.cda</groupId>
+        <artifactId>axl</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
 
       <dependency>

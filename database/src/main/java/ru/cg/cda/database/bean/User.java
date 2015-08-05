@@ -25,6 +25,7 @@ public class User {
   private String positionName;
   private Date insertedAt;
   private Date updatedAt;
+  private Boolean deleted;
 
   private List<User> favorites;
   private Group group;
@@ -188,5 +189,14 @@ public class User {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Column(name = "deleted")
+  public Boolean getDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
   }
 }

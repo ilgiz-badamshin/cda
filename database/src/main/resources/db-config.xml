@@ -15,6 +15,7 @@
   <bean id="accessLevelDao" class="ru.cg.cda.database.dao.AccessLevelDaoImpl"/>
   <bean id="accessToGroupDao" class="ru.cg.cda.database.dao.AccessToGroupDaoImpl"/>
   <bean id="baseDao" class="ru.cg.cda.database.dao.BaseDaoImpl"/>
+  <bean id="deviceDao" class="ru.cg.cda.database.dao.DeviceDaoImpl"/>
   <bean id="favoriteDao" class="ru.cg.cda.database.dao.FavoriteDaoImpl"/>
   <bean id="groupDao" class="ru.cg.cda.database.dao.GroupDaoImpl"/>
   <bean id="historyDao" class="ru.cg.cda.database.dao.HistoryDaoImpl"/>
@@ -33,6 +34,7 @@
       <list>
         <value>ru.cg.cda.database.bean.AccessLevel</value>
         <value>ru.cg.cda.database.bean.AccessToGroup</value>
+        <value>ru.cg.cda.database.bean.Device</value>
         <value>ru.cg.cda.database.bean.Favorite</value>
         <value>ru.cg.cda.database.bean.Group</value>
         <value>ru.cg.cda.database.bean.History</value>

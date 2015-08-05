@@ -82,4 +82,39 @@
     </rollback>
   </changeSet>
 
+  <changeSet id="004" author="badamshin">
+    <addColumn tableName="device">
+      <column name="uds_user_id" type="varchar(50)"/>
+      <column name="deleted" type="boolean"/>
+    </addColumn>
+    <addColumn tableName="user">
+      <column name="deleted" type="boolean"/>
+    </addColumn>
+    <rollback>
+      <dropColumn tableName="device" columnName="uds_user_id"/>
+      <dropColumn tableName="device" columnName="deleted"/>
+      <dropColumn tableName="user" columnName="deleted"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="005" author="badamshin">
+    <dropPrimaryKey tableName="device" constraintName="pk_device"/>
+    <addPrimaryKey tableName="device" columnNames="id" constraintName="device_pk"/>
+    <addAutoIncrement columnName="id" incrementBy="1" tableName="device"/>
+    <rollback>
+      <dropPrimaryKey tableName="device" constraintName="device_pk"/>
+      <addPrimaryKey tableName="device" columnNames="id" constraintName="pk_device"/>
+    </rollback>
+  </changeSet>
+
+  <changeSet id="006" author="badamshin">
+    <sql>update "user" set deleted = false where deleted is null</sql>
+    <sql>update device set deleted = false where deleted is null</sql>
+    <addNotNullConstraint tableName="user" columnName="deleted" defaultNullValue="false"/>
+    <addNotNullConstraint tableName="device" columnName="deleted" defaultNullValue="false"/>
+    <rollback>
+      <dropNotNullConstraint tableName="user" columnName="deleted"/>
+      <dropNotNullConstraint tableName="device" columnName="deleted"/>
+    </rollback>
+  </changeSet>
 </databaseChangeLog>

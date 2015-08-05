@@ -1,5 +1,6 @@
 package ru.cg.cda.scheduler.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ru.cg.cda.database.bean.User;
+import ru.cg.cda.database.dao.ParamsDao;
 import ru.cg.cda.database.dao.UserDao;
 import ru.cg.cda.uds.beans.UdsUser;
 import ru.cg.cda.uds.service.UdsService;
@@ -21,9 +23,14 @@ import ru.cg.cda.uds.service.UdsService;
 @Transactional
 @Component
 public class UserSyncServiceImpl implements UserSyncService {
-  Logger logger = LoggerFactory.getLogger(UserSyncServiceImpl.class);
+
+  private Logger logger = LoggerFactory.getLogger(UserSyncServiceImpl.class);
+
   @Autowired
   private UserDao userDao;
+
+  @Autowired
+  private ParamsDao paramsDao;
 
   @Autowired
   private UdsService udsService;
@@ -31,15 +38,18 @@ public class UserSyncServiceImpl implements UserSyncService {
   public void sync() {
     logger.debug("Sync user start");
     List<UdsUser> udsUsers = udsService.getUsers();
+    List<Long> userIds = new ArrayList<>();
+    Boolean updateDbVersion = false;
     for (UdsUser udsUser : udsUsers) {
       User user = userDao.getByUdsId(udsUser.getId());
       if (user == null) {
         user = new User();
         user.setInsertedAt(new Date());
+        user.setUdsId(udsUser.getId());
       }
       if (isDifferent(user, udsUser)) {
         user.setUpdatedAt(new Date());
-        user.setUdsId(udsUser.getId());
+        user.setDeleted(false);
         user.setUserName(udsUser.getUserName());
         user.setFirstName(udsUser.getFirstName());
         user.setLastName(udsUser.getLastName());
@@ -48,18 +58,32 @@ public class UserSyncServiceImpl implements UserSyncService {
         user.setMobilePhone(udsUser.getMobileNumber());
         user.setWorkPhone(udsUser.getHomeNumber());
         userDao.saveOrUpdate(user);
-        logger.debug("Sync user {} - {}", udsUser.getUserName(), udsUser.getId());
+        logger.debug("Sync user. Username {}, userId  {}", udsUser.getUserName(), udsUser.getId());
       }
       else {
-        logger.debug("User skipped {} - {}", udsUser.getUserName(), udsUser.getId());
+        logger.debug("User skipped. Username {}, userId  {}", udsUser.getUserName(), udsUser.getId());
       }
+      userIds.add(user.getId());
+    }
+
+    Integer deletedCount;
+    if (userIds.size() > 0) {
+      deletedCount = userDao.deleteAllExcept(userIds);
+    }
+    else {
+      deletedCount = userDao.deleteAll();
+    }
+
+    if (deletedCount > 0) {
+      updateDbVersion = true;
+      logger.debug("Deleted user count: {}", deletedCount);
+    }
+    if (updateDbVersion) {
+      paramsDao.increaseDbVersion();
     }
   }
 
   private boolean isDifferent(User user, UdsUser udsUser) {
-    if (!ObjectUtils.equals(user.getUdsId(), udsUser.getId())) {
-      return true;
-    }
     if (!ObjectUtils.equals(user.getUserName(), udsUser.getUserName())) {
       return true;
     }
@@ -79,6 +103,9 @@ public class UserSyncServiceImpl implements UserSyncService {
       return true;
     }
     if (!ObjectUtils.equals(user.getWorkPhone(), udsUser.getHomeNumber())) {
+      return true;
+    }
+    if ( user.getDeleted()) {
       return true;
     }
     return false;

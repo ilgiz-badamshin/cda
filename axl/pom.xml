@@ -25,6 +25,26 @@
       <build>
         <plugins>
           <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.6.1</version>
+            <executions>
+              <execution>
+                <id>clean-sources</id>
+                <phase>clean</phase>
+                <configuration>
+                  <filesets>
+                    <fileset>
+                      <directory>src/main/java/ru/cg/cda/axl/generated</directory>
+                    </fileset>
+                  </filesets>
+                </configuration>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-codegen-plugin</artifactId>
             <version>2.7.8</version>
@@ -36,7 +56,8 @@
                   <sourceRoot>${basedir}/src/main/java/</sourceRoot>
                   <wsdlOptions>
                     <wsdlOption>
-                      <wsdl>${basedir}/src/main/resources/AXLAPI.wsdl</wsdl>
+                      <wsdl>${basedir}/src/main/resources/ru/cg/cda/axl/AXLAPI.wsdl</wsdl>
+                      <wsdlLocation>classpath:ru/cg/cda/axl/AXLAPI.wsdl</wsdlLocation>
                       <!--<serviceName>AXLAPIService</serviceName>-->
                       <extraargs>
                         <extraarg>-impl</extraarg>

@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     if (!visibleIds.contains(groupId)) {
       throw new GroupAccessException("Нет доступа к группе");
     }
-    return convertUsers(userDao.listByField("groupId", groupId));
+    return convertUsers(userDao.byGroup(groupId));
   }
 
   public List<UserDTO> getFavorites() {

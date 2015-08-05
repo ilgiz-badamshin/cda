@@ -8,6 +8,9 @@ import ru.cg.cda.database.bean.User;
  * @author Badamshin
  */
 public interface UserDao extends BaseDao<User> {
+
+  List<User> byGroup(Long groupId);
+
   List<User> favoriteUsers(Long userId);
 
   User getByUdsId(String udsId);

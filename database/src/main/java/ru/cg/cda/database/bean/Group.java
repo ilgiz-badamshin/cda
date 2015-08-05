@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Where;
+
 /**
  * @author Badamshin
  */
@@ -39,6 +41,7 @@ public class Group {
 
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+  @Where(clause = "deleted != 'true'")
   public List<User> getUsers() {
     return users;
   }

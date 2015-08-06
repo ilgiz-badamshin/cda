@@ -1,5 +1,6 @@
 package ru.cg.cda.rest.service;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -70,8 +71,8 @@ public class UserServiceImpl implements UserService {
     }
   }
 
-  public UserDTO getAvatar(Long userId) {
-    return null;  //TODO: implement this method
+  public InputStream getAvatar(Long userId) {
+    return getClass().getClassLoader().getResourceAsStream(String.format("ru/cg/cda/rest/avatar/%s.jpg", userId));
   }
 
   @Override
@@ -94,8 +95,8 @@ public class UserServiceImpl implements UserService {
     userDTO.setWorkPhone(user.getWorkPhone());
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
-
-    userDTO.setAvatarUrl("/rest/user/avatar/" + user.getId().toString());
+    //@TODO убрать ИП из адреса
+    userDTO.setAvatarUrl("http://10.10.18.34:8080/rest/public/avatar/" + user.getId().toString());
     //@TODO сделать методы
     userDTO.setIsFavorite(favoriteDao.isFavorite(RestParamStorage.getCurrrentUserId(), user.getId()));
     return userDTO;

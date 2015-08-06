@@ -1,5 +1,6 @@
 package ru.cg.cda.rest.service;
 
+import java.io.InputStream;
 import java.util.List;
 
 import ru.cg.cda.database.bean.User;
@@ -19,12 +20,11 @@ public interface UserService {
 
   void removeFavorite(Long favoriteId);
 
-  UserDTO getAvatar(Long userId);
-
   List<Long> invisibleIds();
 
   List<UserDTO> convertUsers(List<User> users);
 
   UserDTO convertUser(User user);
 
+  InputStream getAvatar(Long userId);
 }

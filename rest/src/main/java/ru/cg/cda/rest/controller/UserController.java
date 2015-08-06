@@ -3,14 +3,13 @@ package ru.cg.cda.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.cg.cda.rest.dto.UserDTO;
 import ru.cg.cda.database.enums.UserStatus;
+import ru.cg.cda.rest.dto.UserDTO;
 import ru.cg.cda.rest.service.UserService;
 
 /**
@@ -73,16 +72,6 @@ public class UserController {
   @RequestMapping(value = "/favorite/{favoriteId}", method = RequestMethod.DELETE)
   public void removeFavorite(@PathVariable("favoriteId") Long favoriteId) {
     userService.removeFavorite(favoriteId);
-  }
-
-  /**
-   * Возвращает аватарку по идентификатору пользователя
-   *
-   * @return FileSystemResource
-   */
-  @RequestMapping(value = "/avatar/{userId}", method = RequestMethod.GET)
-  public FileSystemResource getAvatar(@PathVariable("userId") Long userId) {
-    return null;
   }
 
   /**

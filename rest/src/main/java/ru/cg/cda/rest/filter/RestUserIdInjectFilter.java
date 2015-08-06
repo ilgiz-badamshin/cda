@@ -1,14 +1,12 @@
 package ru.cg.cda.rest.filter;
 
 import java.io.IOException;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.GenericFilterBean;
 
 import ru.cg.cda.rest.exception.UnknownUserException;
 import ru.cg.cda.rest.storage.RestParamStorage;
@@ -17,25 +15,39 @@ import ru.cg.cda.rest.storage.RestParamStorage;
  * @author Badamshin
  */
 @Component
-public class RestUserIdInjectFilter extends GenericFilterBean {
+public class RestUserIdInjectFilter implements Filter {
 
-  public static final String USER_ID = "UserId";
+  private static final String USER_ID = "UserId";
+  private String excludePatterns;
+
+  @Override
+  public void init(FilterConfig cfg) throws ServletException {
+    this.excludePatterns = cfg.getInitParameter("excludePatterns");
+  }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-    HttpServletRequest httpRequest = this.getAsHttpRequest(request);
 
-    Long userId = extractProjectIdFromRequest(httpRequest);
+    String url = ((HttpServletRequest) request).getRequestURL().toString();
+    if (!matchExcludePatterns(url)) {
 
-    if (userId != null) {
-      //Вяжем к текущему потоку ID пользователя
-      RestParamStorage.setCurrrentUserId(userId);
-    }
-    else {
-      throw new UnknownUserException("Unknown user");
+      HttpServletRequest httpRequest = this.getAsHttpRequest(request);
+      Long userId = extractProjectIdFromRequest(httpRequest);
+
+      if (userId != null) {
+        //Вяжем к текущему потоку ID пользователя
+        RestParamStorage.setCurrrentUserId(userId);
+      }
+      else {
+        throw new UnknownUserException("Unknown user");
+      }
     }
 
     chain.doFilter(request, response);
+  }
+
+  @Override
+  public void destroy() {
   }
 
   private HttpServletRequest getAsHttpRequest(ServletRequest request) {
@@ -56,6 +68,15 @@ public class RestUserIdInjectFilter extends GenericFilterBean {
     catch (NumberFormatException ex) {
       throw new RuntimeException(ex.getMessage(), ex);
     }
+  }
+
+  private Boolean matchExcludePatterns(String url) {
+    if (excludePatterns == null || excludePatterns.isEmpty()) {
+      return false;
+    }
+    Pattern pattern = Pattern.compile(excludePatterns);
+    Matcher matcher = pattern.matcher(url);
+    return matcher.find();
   }
 
 }

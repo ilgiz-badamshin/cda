@@ -13,6 +13,8 @@
     <module>uds</module>
     <module>database</module>
     <module>axl</module>
+    <module>web</module>
+    <module>frontend</module>
   </modules>
   <packaging>pom</packaging>
 

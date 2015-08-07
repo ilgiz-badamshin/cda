@@ -15,7 +15,7 @@
 
   <task:annotation-driven/>
   <context:annotation-config/>
-  <context:component-scan base-package="ru.cg.cda.scheduler.*"/>
+  <context:component-scan base-package="ru.cg.cda.scheduler"/>
 
   <bean id="deviceSyncService" class="ru.cg.cda.scheduler.service.DeviceSyncServiceImpl"/>
   <bean id="userSyncService" class="ru.cg.cda.scheduler.service.UserSyncServiceImpl"/>

@@ -87,7 +87,8 @@ public class UserServiceImpl implements UserService {
     UserDTO userDTO = new UserDTO();
     userDTO.setId(user.getId());
     userDTO.setGroupId(user.getGroupId());
-    userDTO.setLastName(user.getLastName());
+    userDTO.setUserName(user.getUserName());
+    userDTO.setUserUri(user.getUserName() + "@demo.local");
     userDTO.setFirstName(user.getFirstName());
     userDTO.setMiddleName(user.getMiddleName());
     userDTO.setVksNumber(user.getVksNumber());
@@ -95,6 +96,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setWorkPhone(user.getWorkPhone());
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
+
     //@TODO убрать ИП из адреса
     userDTO.setAvatarUrl("http://10.10.18.34:8080/rest/public/avatar/" + user.getId().toString());
     //@TODO сделать методы

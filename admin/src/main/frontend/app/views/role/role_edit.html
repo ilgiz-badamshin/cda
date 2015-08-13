@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+          ng-click="ctrl.dismissModalWindow()">
+    <span class="glyphicon glyphicon-remove"></span>
+  </button>
+  <div ng-switch on="ctrl.isEdit()">
+    <div ng-switch-when="true">
+      <h3 class="modal-title">Редактирование группы</h3>
+    </div>
+    <div ng-switch-default>
+      <h3 class="modal-title">Создание группы</h3>
+    </div>
+  </div>
+</div>
+<div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+<div class="alert alert-info" ng-show="infoMessage">{{infoMessage}}</div>
+<div class="modal-body">
+
+  <form novalidate name="roleForm" class="form-horizontal" role="form">
+    <div class="form-role"
+         ng-class="{ 'has-error' :  roleForm.name.$invalid && (roleForm.name.$dirty || submitted) }">
+      <label>Название:</label>
+      <input type="text" name="name" class="form-control" placeholder="Имя проекта" required autofocus
+             maxlength="100" ng-model="role.name">
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-default" ng-click="ctrl.dismissModalWindow()">Отмена</button>
+      <button class="btn btn-primary" ng-click="ctrl.saveRole()">Сохранить</button>
+    </div>
+  </form>
+
+</div>

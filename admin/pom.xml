@@ -12,6 +12,10 @@
   <packaging>war</packaging>
 
   <dependencies>
+    <dependency>
+      <groupId>ru.cg.cda</groupId>
+      <artifactId>database</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -22,6 +26,15 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
     </dependency>
 
     <!-- Google GSON -->

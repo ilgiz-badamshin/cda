@@ -44,6 +44,10 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+      ts: {
+        files: ['<%= yeoman.app %>/scripts/**/*.ts'],
+        tasks: ['ts', 'fileblocks']
+      },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
@@ -74,6 +78,10 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
+          base: [
+            '.tmp',
+            '<%= yeoman.app %>'
+          ],
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -130,6 +138,30 @@ module.exports = function (grunt) {
       }
     },
 
+    bower: {
+      install: {
+        options: {
+          targetDir: 'app/bower_components'
+        }
+      }
+    },
+
+    ts: {
+      options: {
+        module: 'amd',
+        target: 'es5',
+        sourcemap: true,
+        sourceRoot: '/scripts/',
+        htmlModuleTemplate: '<%= filename %>',
+        htmlVarTemplate: '<%= ext %>'
+      },
+      dist: {
+        src: ['<%= yeoman.app %>/scripts/**/*.ts'],
+        reference: '<%= yeoman.app %>/scripts/refs.ts',
+        outDir: '.tmp/scripts'
+      }
+    },
+
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -167,7 +199,18 @@ module.exports = function (grunt) {
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /..\//
+        ignorePath: '<%= yeoman.app %>/'
+      }
+    },
+
+    // Automatically inject out scripts into the app
+    fileblocks: {
+      dist: {
+        /* Configure a single source file */
+        src: '<%= yeoman.app %>/index.html',
+        blocks: {
+          app: {src: 'scripts/app/**/*.js', cwd: '.tmp'},
+        }
       }
     },
 
@@ -207,7 +250,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
       }
     },
 
@@ -321,7 +364,7 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
+          cwd: './app/bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]
@@ -337,15 +380,18 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        'copy:styles',
+        'ts'
       ],
       test: [
-        'copy:styles'
+        'copy:styles',
+        'ts'
       ],
       dist: [
         'copy:styles',
         'imagemin',
-        'svgmin'
+        'svgmin',
+        'ts'
       ]
     },
 
@@ -389,14 +435,16 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'bower',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
+    'fileblocks',
     'autoprefixer',
     'concat',
     'ngmin',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
     'uglify',
     'filerev',

@@ -1,0 +1,121 @@
+<div class="table ">
+  <div class="tr">
+    <div class="td" ng-class="{active : ctrl.isCurrentTabSelected(1)}">
+      <div class=""><a href ng-click="ctrl.setTab(1)">Профиль</a></div>
+    </div>
+    <div class="td" ng-class="{active : ctrl.isCurrentTabSelected(2)}">
+      <div class=""><a href ng-click="ctrl.setTab(2)">Роли</a></div>
+    </div>
+    <div class="td" ng-class="{active : ctrl.isCurrentTabSelected(3)}">
+      <div class=""><a href ng-click="ctrl.setTab(3)">История</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="" ng-show="ctrl.isCurrentTabSelected(1)">
+  <table>
+    <tr>
+      <td>
+        userName
+      </td>
+      <td>
+        <span>{{user.userName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        lastName
+      </td>
+      <td>
+        <span>{{user.lastName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        firstName
+      </td>
+      <td>
+        <span>{{user.firstName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        middleName
+      </td>
+      <td>
+        <span>{{user.middleName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        vksNumber
+      </td>
+      <td>
+        <span>{{user.vksNumber}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        orgName
+      </td>
+      <td>
+        <span>{{user.orgName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        positionName
+      </td>
+      <td>
+        <span>{{user.positionName}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        group
+      </td>
+      <td>
+        <div ng-show="!ctrl.isEditGroup()">
+          <span>{{user.group.name}}</span>
+          <button class="btn btn-default" ng-click="ctrl.setEditGroup(true)">
+            <span class="glyphicon glyphicon-edit"></span>
+            Редактировать
+          </button>
+        </div>
+        <div ng-show="ctrl.isEditGroup()" class="form-group">
+          <select class="form-control" ng-options="group.id as group.name for group in groups"
+                  ng-model="selectedGroupId"></select>
+
+          <button class="btn btn-default" ng-click="ctrl.saveUserGroup()">
+            <span class="glyphicon glyphicon-ok"></span>
+            Сохранить
+          </button>
+          <button class="btn btn-default" ng-click="ctrl.setEditGroup(false)">
+            <span class="glyphicon glyphicon-remove"></span>
+            Отмена
+          </button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="" ng-show="ctrl.isCurrentTabSelected(2)">
+  Доступные
+  <ul ng-repeat="role in availableRoles">
+    <li>
+      {{role.name}}
+      <button ng-click="ctrl.addRole(role.id)">add</button>
+    </li>
+  </ul>
+  Выбранные
+
+  <ul ng-repeat="role in selectedRoles">
+    <li>
+      {{role.name}}
+      <button ng-click="ctrl.removeRole(role.id)">remove</button>
+    </li>
+  </ul>
+</div>
+<div class="" ng-show="ctrl.isCurrentTabSelected(3)">
+  Тут будет история звонков
+</div>

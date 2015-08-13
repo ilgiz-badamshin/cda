@@ -1,7 +1,4 @@
-package ru.cg.cda.rest.dto;
-
-import ru.cg.cda.database.enums.AccessLevel;
-import ru.cg.cda.database.enums.UserStatus;
+package ru.cg.cda.admin.dto;
 
 /**
  * @author Badamshin
@@ -21,8 +18,7 @@ public class UserDTO {
   private String positionName;
   private String avatarUrl;
   private Boolean isFavorite;
-  private AccessLevel accessLevel;
-  private UserStatus userStatus;
+  private GroupDTO group;
 
   public Long getId() {
     return id;
@@ -136,19 +132,11 @@ public class UserDTO {
     this.isFavorite = isFavorite;
   }
 
-  public AccessLevel getAccessLevel() {
-    return accessLevel;
+  public GroupDTO getGroup() {
+    return group;
   }
 
-  public void setAccessLevel(AccessLevel accessLevel) {
-    this.accessLevel = accessLevel;
-  }
-
-  public UserStatus getUserStatus() {
-    return userStatus;
-  }
-
-  public void setUserStatus(UserStatus userStatus) {
-    this.userStatus = userStatus;
+  public void setGroup(GroupDTO group) {
+    this.group = group;
   }
 }

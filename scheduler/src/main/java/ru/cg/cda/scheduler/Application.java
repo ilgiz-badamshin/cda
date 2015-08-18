@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 import ru.cg.cda.scheduler.service.DeviceSyncService;
 import ru.cg.cda.scheduler.service.UserSyncService;
@@ -13,7 +12,6 @@ import ru.cg.cda.scheduler.service.UserSyncService;
 /**
  * @author Badamshin
  */
-@Component
 public class Application {
 
   public static void main(String[] args) throws NoSuchAlgorithmException, KeyManagementException {

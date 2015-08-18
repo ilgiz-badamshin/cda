@@ -8,12 +8,10 @@ module cda.app.controller {
 
   export interface IUserEditScope extends ng.IScope {
     ctrl: UserEditController;
-    user: m.User;
     userId: number;
+    user: m.User;
     tab: number;
     roles: m.Role[];
-    selectedRoles: m.Role[] ;
-    availableRoles: m.Role[];
     roleIds: number[];
     groups: m.Group[];
     selectedGroupId: number;
@@ -31,8 +29,6 @@ module cda.app.controller {
 
     loadUserRoleIds(): void;
 
-    updateRoles(): void;
-
     addRole(roleId: number): void;
 
     removeRole(roleId: number): void;
@@ -44,6 +40,8 @@ module cda.app.controller {
     isEditGroup(): boolean;
 
     saveUserGroup(): void;
+
+    startWatch() : void;
   }
 
   interface IRouteParams extends ng.route.IRouteParamsService {
@@ -51,23 +49,56 @@ module cda.app.controller {
   }
 
   export class UserEditController implements IUserEditController {
-    static $inject = ['$scope', '$routeParams', 'UserService', 'RoleService', 'GroupService'];
+    static $inject = ['$scope', '$routeParams', '$modal', 'UserService', 'RoleService', 'GroupService'];
+    modalServiceInstance: ng.ui.bootstrap.IModalServiceInstance;
 
-    constructor(private $scope: IUserEditScope, private $routeParams: IRouteParams, private $userService: s.IUserService, private $roleService: s.IRoleService, private $groupService: s.IGroupService) {
+    constructor(private $scope: IUserEditScope, private $routeParams: IRouteParams, private $modal: ng.ui.bootstrap.IModalService, private $userService: s.IUserService, private $roleService: s.IRoleService, private $groupService: s.IGroupService) {
       $scope.roles = [];
-      $scope.roleIds = null;
+      $scope.roleIds = [];
       $scope.ctrl = this;
       $scope.userId = $routeParams.userId;
       $scope.isEditGroup = false;
 
-      this.setTab(1);
       this.loadUser();
       this.loadGroups();
       this.loadRoles();
+      this.setTab(1);
+    }
 
-      $scope.$watchCollection('roleIds', function (newValue, oldValue) {
-        $scope.ctrl.updateRoles();
+    arrayDiff(a1, a2) {
+      var diff = [];
+      for (var i = 0; i < a1.length; i++) {
+        if (a2.indexOf(a1[i]) < 0) {
+          diff.push(a1[i]);
+        }
+      }
+
+      return diff;
+    }
+
+    openEditAvatar() {
+      var userId: number = this.$scope.userId;
+      this.modalServiceInstance = this.$modal.open({
+        templateUrl: 'views/user/user_avatar.html',
+        controller: 'UserAvatarCtrl',
+        resolve: {
+          userId: function () {
+            return userId;
+          }
+        }
       });
+
+      this.modalServiceInstance.result.then((refresh: boolean) => {
+        if (refresh) {
+          this.$scope.user.avatarUrl = this.$scope.user.avatarUrl + '?' + new Date().getTime();
+        }
+      });
+    }
+
+    private refreshAfterModalClose(refresh: boolean) {
+      if (refresh) {
+        alert('refresh image');
+      }
     }
 
     loadUser(): void {
@@ -99,37 +130,31 @@ module cda.app.controller {
       this.$userService.getUserRoleIds(this.$scope.userId).then(
         (roleIds) => {
           this.$scope.roleIds = roleIds;
+          this.startWatch();
         },
         ()=> alert('Error getUserRoleIds')
+      );
+    }
+
+    startWatch(): void {
+      var that = this;
+      this.$scope.$watchCollection('roleIds', function (newValue, oldValue) {
+          var inserted = that.arrayDiff(newValue, oldValue);
+          for (var k = 0; k < inserted.length; k++) {
+            that.addRole(inserted[k]);
+          }
+
+          var deleted = that.arrayDiff(oldValue, newValue);
+          for (var k = 0; k < deleted.length; k++) {
+            that.removeRole(deleted[k]);
+          }
+        }
       );
     }
 
 
     loadGroups() {
       this.$groupService.getGroups().then((groups) => this.$scope.groups = groups);
-    }
-
-    updateRoles(): void {
-      this.$scope.selectedRoles = [];
-      this.$scope.availableRoles = [];
-
-      for (var i = 0; i < this.$scope.roles.length; i++) {
-        var role: m.Role = this.$scope.roles[i];
-        var inArray = false;
-        for (var k = 0; k < this.$scope.roleIds.length; k++) {
-          var roleId = this.$scope.roleIds[k];
-          if (role.id == roleId) {
-            inArray = true;
-            break;
-          }
-        }
-        if (inArray) {
-          this.$scope.selectedRoles.push(role);
-        }
-        else {
-          this.$scope.availableRoles.push(role);
-        }
-      }
     }
 
     addRole(roleId: number): void {

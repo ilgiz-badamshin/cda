@@ -1,11 +1,12 @@
 package ru.cg.cda.rest.service;
 
-import java.io.InputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,8 @@ public class UserServiceImpl implements UserService {
   private RoleDao roleDao;
   @Autowired
   private FavoriteDao favoriteDao;
+  @Value("${avatarsFolder}")
+  private String AVATARS_FOLDER;
 
   public UserDTO getUser(Long userId) {
     List<Long> visibleIds = roleDao.visibleUserIds(userId);
@@ -71,8 +74,8 @@ public class UserServiceImpl implements UserService {
     }
   }
 
-  public InputStream getAvatar(Long userId) {
-    return getClass().getClassLoader().getResourceAsStream(String.format("ru/cg/cda/rest/avatar/%s.jpg", userId));
+  public File getAvatar(Long userId) {
+    return new File(AVATARS_FOLDER, userId + ".png");
   }
 
   @Override
@@ -89,6 +92,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setGroupId(user.getGroupId());
     userDTO.setUserName(user.getUserName());
     userDTO.setUserUri(user.getUserName() + "@demo.local");
+    userDTO.setLastName(user.getLastName());
     userDTO.setFirstName(user.getFirstName());
     userDTO.setMiddleName(user.getMiddleName());
     userDTO.setVksNumber(user.getVksNumber());

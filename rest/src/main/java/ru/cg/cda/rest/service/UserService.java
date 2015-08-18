@@ -1,6 +1,6 @@
 package ru.cg.cda.rest.service;
 
-import java.io.InputStream;
+import java.io.File;
 import java.util.List;
 
 import ru.cg.cda.database.bean.User;
@@ -26,5 +26,5 @@ public interface UserService {
 
   UserDTO convertUser(User user);
 
-  InputStream getAvatar(Long userId);
+  File getAvatar(Long userId);
 }

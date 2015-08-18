@@ -11,6 +11,7 @@ module cda.app.service {
     addRole(userId: number, roleId: number): ng.IPromise<void>;
     removeRole(userId: number, roleId: number):  ng.IPromise<void>;
     setGroup(userId: number, groupId: number): ng.IPromise<void>;
+    setAvatar(userId: number, file: String): ng.IPromise<void>;
   }
 
   class UserService implements IUserService {
@@ -41,6 +42,10 @@ module cda.app.service {
 
     setGroup(userId: number, groupId: number): ng.IPromise<void> {
       return this.restangular.one('user', userId).one('group', groupId).put();
+    }
+
+    setAvatar(userId: number, file: String): ng.IPromise<void> {
+      return this.restangular.one('user', userId).all('avatar').post(file);
     }
   }
 

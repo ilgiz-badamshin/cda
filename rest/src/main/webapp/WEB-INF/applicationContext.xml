@@ -12,5 +12,6 @@
   <mvc:annotation-driven/>
   <context:annotation-config/>
   <context:component-scan base-package="ru.cg.cda.rest"/>
+  <context:property-placeholder location="classpath*:ru/cg/cda/rest/rest.properties"/>
 
 </beans>

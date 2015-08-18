@@ -11,6 +11,7 @@
 /// <reference path="app/controller/MainController.ts" />
 /// <reference path="app/controller/RoleController.ts" />
 /// <reference path="app/controller/RoleEditController.ts" />
+/// <reference path="app/controller/UserAvatarController.ts" />
 /// <reference path="app/controller/UserController.ts" />
 /// <reference path="app/controller/UserEditController.ts" />
 /// <reference path="app/model/Device.ts" />

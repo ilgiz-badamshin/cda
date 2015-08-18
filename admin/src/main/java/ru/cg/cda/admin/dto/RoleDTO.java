@@ -8,6 +8,7 @@ import java.util.List;
 public class RoleDTO {
   private Long id;
   private String name;
+  private List<Long> groupIds;
   private List<GroupDTO> groups;
 
   public Long getId() {
@@ -32,5 +33,13 @@ public class RoleDTO {
 
   public void setGroups(List<GroupDTO> groups) {
     this.groups = groups;
+  }
+
+  public List<Long> getGroupIds() {
+    return groupIds;
+  }
+
+  public void setGroupIds(List<Long> groupIds) {
+    this.groupIds = groupIds;
   }
 }

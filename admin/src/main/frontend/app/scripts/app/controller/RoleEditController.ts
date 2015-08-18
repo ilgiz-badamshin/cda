@@ -12,6 +12,7 @@ module cda.app.controller {
     roleId: number;
     $$childTail: any;
     submitted: boolean;
+    groups: m.Group[];
   }
 
   export interface IRoleEditController {
@@ -23,19 +24,21 @@ module cda.app.controller {
   }
 
   export class RoleEditController implements IRoleEditController {
-    static $inject = ['$scope', '$location', '$modalInstance', 'roleId', 'RoleService'];
+    static $inject = ['$scope', '$location', '$modalInstance', 'roleId', 'RoleService', 'GroupService'];
 
-    constructor(private $scope: IRoleEditScope, private $location: ng.ILocationService, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private roleId: number, private $roleService: s.IRoleService) {
+    constructor(private $scope: IRoleEditScope, private $location: ng.ILocationService, private $modalInstance: ng.ui.bootstrap.IModalServiceInstance, private roleId: number, private $roleService: s.IRoleService, private $groupService: s.IGroupService) {
+      $scope.groups = [];
       $scope.ctrl = this;
       $scope.roleId = roleId;
       $scope.submitted = false;
 
       this.loadRole();
+      this.loadGroups();
     }
 
     loadRole(): void {
       if (this.$scope.roleId)
-        this.$roleService.getRole(this.$scope.roleId).then((role) => this.$scope.role = role);
+        this.$roleService.getRole(this.$scope.roleId, true).then((role) => this.$scope.role = role);
       else
         this.$scope.role = new m.Role();
     }
@@ -53,7 +56,6 @@ module cda.app.controller {
 
     isEdit(): boolean {
       return !!this.$scope.roleId;
-
     }
 
     dismissModalWindow(): void {
@@ -62,6 +64,15 @@ module cda.app.controller {
 
     isValid(): boolean {
       return this.$scope.$$childTail.roleForm.$valid;
+    }
+
+    loadGroups(): void {
+      this.$groupService.getGroups().then(
+        (groups) => {
+          this.$scope.groups = groups;
+        },
+        ()=> alert('Error loadGroups')
+      );
     }
   }
 

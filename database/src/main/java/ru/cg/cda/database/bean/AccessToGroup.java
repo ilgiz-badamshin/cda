@@ -11,7 +11,6 @@ public class AccessToGroup {
   private Long id;
   private Long roleId;
   private Long groupId;
-  private Long accessLevelId;
   private Role role;
   private Group group;
 
@@ -43,15 +42,6 @@ public class AccessToGroup {
 
   public void setGroupId(Long groupId) {
     this.groupId = groupId;
-  }
-
-  @Column(name = "access_level_id")
-  public Long getAccessLevelId() {
-    return accessLevelId;
-  }
-
-  public void setAccessLevelId(Long accessLevelId) {
-    this.accessLevelId = accessLevelId;
   }
 
   @ManyToOne(fetch = FetchType.LAZY)

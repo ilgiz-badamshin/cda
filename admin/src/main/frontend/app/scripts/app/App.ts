@@ -1,7 +1,7 @@
 'use strict';
 
 module cda.app {
-  angular.module('adminApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngLocale', 'ngRoute', 'restangular', 'ui.bootstrap'])
+  angular.module('adminApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngLocale', 'ngRoute', 'restangular', 'ui.bootstrap', 'ui.grid', 'ui.grid.pagination', 'ui.grid.autoResize', 'frapontillo.bootstrap-duallistbox', 'angular-img-cropper'])
     .config(['$routeProvider', ($routeProvider) => {
       $routeProvider
         .when('/', {

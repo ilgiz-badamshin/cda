@@ -207,4 +207,23 @@
     </pluginManagement>
   </build>
 
+  <profiles>
+    <profile>
+      <id>dev_config</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <uds.url>https://10.10.18.34:8443</uds.url>
+        <avatars.folder>/home/ilgiz/cda-avatars</avatars.folder>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod_config</id>
+      <properties>
+        <uds.url>https://10.10.13.10:8443</uds.url>
+        <avatars.folder>C:\\server\\avatars</avatars.folder>
+      </properties>
+    </profile>
+  </profiles>
 </project>

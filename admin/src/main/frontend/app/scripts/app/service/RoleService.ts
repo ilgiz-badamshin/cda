@@ -6,7 +6,7 @@ module cda.app.service {
 
   export interface IRoleService {
     getRoles(): ng.IPromise<Role[]>;
-    getRole(roleId: number): ng.IPromise<Role>;
+    getRole(roleId: number, withGroupIds ?: boolean): ng.IPromise<Role>;
     saveRole(role: Role): ng.IPromise<Role>;
   }
 
@@ -20,8 +20,8 @@ module cda.app.service {
       return this.restangular.all('role').getList();
     }
 
-    getRole(roleId: number): ng.IPromise<Role> {
-      return this.restangular.one('role', roleId).get();
+    getRole(roleId: number, withGroupIds: boolean = false): ng.IPromise<Role> {
+      return this.restangular.one('role', roleId).get({"withGroupIds": withGroupIds});
     }
 
     saveRole(role: Role): ng.IPromise<Role> {

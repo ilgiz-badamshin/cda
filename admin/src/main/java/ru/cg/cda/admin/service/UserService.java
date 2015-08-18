@@ -1,5 +1,6 @@
 package ru.cg.cda.admin.service;
 
+import java.io.File;
 import java.util.List;
 
 import ru.cg.cda.admin.dto.UserDTO;
@@ -22,4 +23,8 @@ public interface UserService {
   UserDTO convertUser(User user);
 
   void setGroup(Long userId, Long groupId);
+
+  void saveAvatar(Long userId, String avatar);
+
+  File getAvatar(Long userId);
 }

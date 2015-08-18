@@ -9,6 +9,7 @@ module cda.app.controller {
   export interface IGroupScope extends ng.IScope {
     ctrl: GroupController;
     groups: m.Group[];
+    gridOptions:any;
   }
 
   export interface IGroupController {
@@ -22,6 +23,31 @@ module cda.app.controller {
     constructor(private $scope: IGroupScope, private $location: ng.ILocationService, private $modal: ng.ui.bootstrap.IModalService, private $groupService: s.IGroupService) {
       $scope.ctrl = this;
       this.getGroups();
+
+      $scope.gridOptions = {
+        data: 'groups',
+        enableFiltering: true,
+        paginationTemplate: "views/main/ui-grid-paging.html",
+        paginationPageSize: 25,
+        paginationPageSizes: [25, 50, 75],
+        columnDefs: [
+          {field: 'id'},
+          {
+            field: 'name',
+            sort: {
+              direction: "asc",
+              priority: 0,
+            },
+          },
+          {
+            field: 'id',
+            displayName: '',
+            enableFiltering: false,
+            enableSorting: false,
+            cellTemplate: '<div class="action-buttons"><a href ng-click="grid.appScope.ctrl.openGroupEdit(COL_FIELD)"> <i class="ace-icon fa fa-pencil bigger-130"></i></a></div>'
+          }
+        ],
+      };
     }
 
     getGroups() {

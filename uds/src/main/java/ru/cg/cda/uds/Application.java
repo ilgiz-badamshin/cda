@@ -5,14 +5,12 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 import ru.cg.cda.uds.service.UdsService;
 
 /**
  * @author Badamshin
  */
-@Component // Main is a Spring-managed bean too, since it have @Autowired property
 public class Application {
 
 

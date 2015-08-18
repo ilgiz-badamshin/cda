@@ -17,6 +17,7 @@ public class UserDTO {
   private String orgName;
   private String positionName;
   private String avatarUrl;
+  private Boolean deleted;
   private Boolean isFavorite;
   private GroupDTO group;
 
@@ -138,5 +139,13 @@ public class UserDTO {
 
   public void setGroup(GroupDTO group) {
     this.group = group;
+  }
+
+  public Boolean getDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
   }
 }

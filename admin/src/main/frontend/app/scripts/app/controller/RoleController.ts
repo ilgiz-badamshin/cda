@@ -9,6 +9,7 @@ module cda.app.controller {
   export interface IRoleScope extends ng.IScope {
     ctrl: RoleController;
     roles: m.Role[];
+    gridOptions:any;
   }
 
   export interface IRoleController {
@@ -22,6 +23,31 @@ module cda.app.controller {
     constructor(private $scope: IRoleScope, private $location: ng.ILocationService, private $modal: ng.ui.bootstrap.IModalService, private $roleService: s.IRoleService) {
       $scope.ctrl = this;
       this.getRoles();
+
+      $scope.gridOptions = {
+        data: 'roles',
+        enableFiltering: true,
+        paginationTemplate: "views/main/ui-grid-paging.html",
+        paginationPageSize: 25,
+        paginationPageSizes: [25, 50, 75],
+        columnDefs: [
+          {field: 'id'},
+          {
+            field: 'name',
+            sort: {
+              direction: "asc",
+              priority: 0,
+            },
+          },
+          {
+            field: 'id',
+            displayName: '',
+            enableFiltering: false,
+            enableSorting: false,
+            cellTemplate: '<div class="action-buttons"><a href ng-click="grid.appScope.ctrl.openRoleEdit(COL_FIELD)"> <i class="ace-icon fa fa-pencil bigger-130"></i></a></div>'
+          }
+        ],
+      };
     }
 
     getRoles() {

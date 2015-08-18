@@ -1,16 +1,17 @@
 package ru.cg.cda.admin.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ru.cg.cda.admin.dto.UserDTO;
 import ru.cg.cda.admin.service.LinkUserRoleService;
-import ru.cg.cda.admin.service.ParamsService;
 import ru.cg.cda.admin.service.UserService;
 
 
@@ -59,5 +60,22 @@ public class UserController {
   @RequestMapping(value = "/{userId}/group/{groupId}", method = RequestMethod.PUT)
   public void setGroupId(@PathVariable Long userId, @PathVariable Long groupId) {
     userService.setGroup(userId, groupId);
+  }
+
+  @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.POST)
+  public void setAvatar(@PathVariable Long userId, @RequestBody String image) {
+    userService.saveAvatar(userId, image);
+  }
+
+  @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.GET)
+  public void getAvatar(@PathVariable("userId") Long userId, HttpServletResponse response) {
+    try {
+      InputStream inputStream = new FileInputStream(userService.getAvatar(userId));
+      IOUtils.copy(inputStream, response.getOutputStream());
+      response.flushBuffer();
+    }
+    catch (IOException ex) {
+      throw new RuntimeException("IOError writing file to output stream");
+    }
   }
 }

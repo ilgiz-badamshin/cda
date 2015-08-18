@@ -17,6 +17,7 @@ module cda.app.model {
     workPhone: string;
     orgName: string;
     positionName: string;
+    avatarUrl: string;
     insertedAt: number;
     updatedAt: number;
     deleted: boolean;

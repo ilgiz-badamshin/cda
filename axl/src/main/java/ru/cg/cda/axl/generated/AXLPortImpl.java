@@ -15,12 +15,12 @@ import java.util.logging.Logger;
  * 
  */
 
-@javax.jws.WebService(
-                      serviceName = "AXLAPIService",
-                      portName = "AXLPort",
-                      targetNamespace = "http://www.cisco.com/AXLAPIService/",
-                      wsdlLocation = "classpath:ru/cg/cda/axl/AXLAPI.wsdl",
-                      endpointInterface = "ru.cg.cda.axl.generated.AXLPort")
+//@javax.jws.WebService(
+//                      serviceName = "AXLAPIService",
+//                      portName = "AXLPort",
+//                      targetNamespace = "http://www.cisco.com/AXLAPIService/",
+//                      wsdlLocation = "classpath:ru/cg/cda/axl/AXLAPI.wsdl",
+//                      endpointInterface = "ru.cg.cda.axl.generated.AXLPort")
                       
 public class AXLPortImpl implements AXLPort {
 

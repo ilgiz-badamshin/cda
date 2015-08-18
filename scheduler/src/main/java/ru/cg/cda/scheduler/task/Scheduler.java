@@ -1,7 +1,5 @@
 package ru.cg.cda.scheduler.task;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,8 @@ public class Scheduler {
   @Autowired
   DeviceSyncService deviceSyncService;
 
-  @Scheduled(fixedDelay = 20000)
+  @Scheduled(fixedDelay = 1800000)
   public void syncUds() {
-    logger.error("Test message {} - {}", COUNTER, new Date());
-    COUNTER++;
-
     userSyncService.sync();
     deviceSyncService.sync();
   }

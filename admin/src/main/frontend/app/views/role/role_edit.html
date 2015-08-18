@@ -5,10 +5,10 @@
   </button>
   <div ng-switch on="ctrl.isEdit()">
     <div ng-switch-when="true">
-      <h3 class="modal-title">Редактирование группы</h3>
+      <h3 class="modal-title">Редактирование роли</h3>
     </div>
     <div ng-switch-default>
-      <h3 class="modal-title">Создание группы</h3>
+      <h3 class="modal-title">Создание роли</h3>
     </div>
   </div>
 </div>
@@ -17,11 +17,28 @@
 <div class="modal-body">
 
   <form novalidate name="roleForm" class="form-horizontal" role="form">
-    <div class="form-role"
+    <div class="form-group"
          ng-class="{ 'has-error' :  roleForm.name.$invalid && (roleForm.name.$dirty || submitted) }">
       <label>Название:</label>
       <input type="text" name="name" class="form-control" placeholder="Имя проекта" required autofocus
              maxlength="100" ng-model="role.name">
+    </div>
+    <div class="form-group">
+      <label>Доступ к группам:</label>
+
+      <select
+        ng-options="group.id as group.name for group in groups"
+        multiple
+        ng-model="role.groupIds"
+        bs-duallistbox
+
+        filter="false"
+
+        non-selected-list-label="Доступные"
+        selected-list-label="Выбранные"
+        >
+      </select>
+
     </div>
 
     <div class="form-actions">

@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+          ng-click="ctrl.dismissModalWindow()">
+    <span class="glyphicon glyphicon-remove"></span>
+  </button>
+  <div>
+    <h3 class="modal-title">Загрузка аватара</h3>
+  </div>
+</div>
+<div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+<div class="alert alert-info" ng-show="infoMessage">{{infoMessage}}</div>
+<div class="modal-body">
+  <style>
+    .cropped-image {
+      width: 300px;
+      height: 300px;
+      background: silver;
+    }
+  </style>
+  <form novalidate name="roleForm" class="form-horizontal" role="form">
+
+    <div class="form-group">
+      <label>Выберите файл:</label>
+      <input type="file" img-cropper-fileread image="sourceImage"/>
+    </div>
+
+    <div class="form-group">
+      <canvas
+        id="canvas" width="500" height="300"
+        image-cropper image="sourceImage"
+        cropped-image="croppedImage"
+        crop-width="300"
+        crop-height="300"
+        keep-aspect="true"
+        touch-radius="15"></canvas>
+    </div>
+
+    <div class="form-group">
+      <div class="cropped-image">
+        <img ng-src="{{croppedImage}}"/>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-default" ng-click="ctrl.dismissModalWindow()">Отмена</button>
+      <button class="btn btn-primary" ng-click="ctrl.saveAvatar()">Сохранить</button>
+    </div>
+  </form>
+
+</div>

@@ -23,6 +23,14 @@ module studio.app.controller {
       }
     }
 
+    getPageName(): string {
+      return this.$location.path();
+    }
+
+    getPageDescr(): string {
+      return this.$location.path();
+    }
+
   }
 
   angular.module('adminApp')
@@ -30,6 +38,16 @@ module studio.app.controller {
     .directive('adminHeader', function () {
       return {
         templateUrl: 'views/main/admin_header.html'
+      };
+    })
+    .directive('pageHeader', function () {
+      return {
+        templateUrl: 'views/main/page_header.html'
+      };
+    })
+    .directive('sidebar', function () {
+      return {
+        templateUrl: 'views/main/sidebar.html'
       };
     });
 }

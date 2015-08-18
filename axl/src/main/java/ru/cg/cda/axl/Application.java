@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 import ru.cg.cda.axl.beans.AxlUser;
 import ru.cg.cda.axl.service.AxlService;
@@ -14,7 +13,6 @@ import ru.cg.cda.axl.service.AxlService;
 /**
  * @author Badamshin
  */
-@Component
 public class Application {
 
   public static void main(String[] args) throws NoSuchAlgorithmException, KeyManagementException {

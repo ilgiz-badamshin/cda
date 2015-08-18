@@ -367,7 +367,26 @@ module.exports = function (grunt) {
           cwd: './app/bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
-        }]
+        }, {
+          //@TODO мб как то по другому это сделать?
+          expand: true,
+          cwd: '<%= yeoman.app %>',
+          src: 'assets/{,*/}**',
+          dest: '<%= yeoman.dist %>'
+        },
+          //font di ui grid
+          //@TODO мб как то про другомау сделать
+          {
+            expand: true,
+            flatten: true,
+            dest: '<%= yeoman.dist %>/styles/',
+            src: ['./app/bower_components/angular-ui-grid/ui-grid.ttf',
+              './app/bower_components/angular-ui-grid/ui-grid.woff',
+              './app/bower_components/angular-ui-grid/ui-grid.eot',
+              './app/bower_components/angular-ui-grid/ui-grid.svg'
+            ]
+          }
+        ]
       },
       styles: {
         expand: true,

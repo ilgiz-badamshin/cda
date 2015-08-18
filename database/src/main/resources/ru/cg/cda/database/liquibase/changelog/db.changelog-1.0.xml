@@ -117,4 +117,13 @@
       <dropNotNullConstraint tableName="device" columnName="deleted"/>
     </rollback>
   </changeSet>
+
+  <changeSet id="007" author="badamshin">
+    <dropColumn tableName="access_to_group" columnName="access_level_id"/>
+    <rollback>
+      <addColumn tableName="access_to_group">
+        <column name="access_level_id" type="bigint"/>
+      </addColumn>
+    </rollback>
+  </changeSet>
 </databaseChangeLog>

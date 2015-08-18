@@ -1,5 +1,6 @@
 package ru.cg.cda.rest.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class PublicController {
   @RequestMapping(value = "/avatar/{userId}", method = RequestMethod.GET)
   public void getAvatar(@PathVariable("userId") Long userId, HttpServletResponse response) {
     try {
-      InputStream inputStream = userService.getAvatar(userId);
+      InputStream inputStream = new FileInputStream(userService.getAvatar(userId));
       IOUtils.copy(inputStream, response.getOutputStream());
       response.flushBuffer();
     }

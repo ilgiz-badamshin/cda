@@ -62,6 +62,16 @@ public class UserController {
     userService.setGroup(userId, groupId);
   }
 
+  @RequestMapping(value = "/{userId}/orgName", method = RequestMethod.POST)
+  public void setOrgName(@PathVariable Long userId, @RequestBody String orgName) {
+    userService.setOrgName(userId, orgName);
+  }
+
+  @RequestMapping(value = "/{userId}/positionName", method = RequestMethod.POST)
+  public void setPositionName(@PathVariable Long userId, @RequestBody String positionName) {
+    userService.setPositionName(userId, positionName);
+  }
+
   @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.POST)
   public void setAvatar(@PathVariable Long userId, @RequestBody String image) {
     userService.saveAvatar(userId, image);

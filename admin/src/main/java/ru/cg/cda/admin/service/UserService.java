@@ -24,6 +24,10 @@ public interface UserService {
 
   void setGroup(Long userId, Long groupId);
 
+  void setOrgName(Long userId, String orgName);
+
+  void setPositionName(Long userId, String positionName);
+
   void saveAvatar(Long userId, String avatar);
 
   File getAvatar(Long userId);

@@ -65,6 +65,26 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public void setOrgName(Long userId, String orgName) {
+    User user = userDao.get(userId);
+    if (user != null) {
+      user.setOrgName(orgName);
+      userDao.saveOrUpdate(user);
+      paramsService.increaseDbVersion();
+    }
+  }
+
+  @Override
+  public void setPositionName(Long userId, String positionName) {
+    User user = userDao.get(userId);
+    if (user != null) {
+      user.setPositionName(positionName);
+      userDao.saveOrUpdate(user);
+      paramsService.increaseDbVersion();
+    }
+  }
+
+  @Override
   public File getAvatar(Long userId) {
     return new File(AVATARS_FOLDER, userId + ".png");
   }

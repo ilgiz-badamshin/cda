@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.cg.cda.database.enums.UserStatus;
 import ru.cg.cda.rest.dto.UserDTO;
 import ru.cg.cda.rest.service.UserService;
+import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
  * @author Badamshin
@@ -31,6 +32,15 @@ public class UserController {
   @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
   public UserDTO getUser(@PathVariable Long userId) {
     return userService.getUser(userId);
+  }
+  /**
+   * Возвращает текущего пользователя
+   *
+   * @return UserDTO
+   */
+  @RequestMapping(value = "/current", method = RequestMethod.GET)
+  public UserDTO getcurrentUser() {
+    return userService.getUser(RestParamStorage.getCurrrentUserId());
   }
 
   /**

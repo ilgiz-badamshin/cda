@@ -15,7 +15,11 @@ module cda.app.controller {
     roleIds: number[];
     groups: m.Group[];
     selectedGroupId: number;
+    orgName: string;
+    positionName: string;
     isEditGroup: boolean;
+    isEditOrgName: boolean;
+    isEditPositionName: boolean;
   }
 
   export interface IUserEditController {
@@ -37,9 +41,15 @@ module cda.app.controller {
 
     setEditGroup(isEditGroup: boolean): void;
 
-    isEditGroup(): boolean;
-
     saveUserGroup(): void;
+
+    setEditOrgName(isEditOrgName: boolean): void;
+
+    saveOrgName(): void;
+
+    setEditPositionName(isEditPositionName: boolean): void;
+
+    savePositionName(): void;
 
     startWatch() : void;
   }
@@ -58,6 +68,8 @@ module cda.app.controller {
       $scope.ctrl = this;
       $scope.userId = $routeParams.userId;
       $scope.isEditGroup = false;
+      $scope.isEditOrgName = false;
+      $scope.isEditPositionName = false;
 
       this.loadUser();
       this.loadGroups();
@@ -105,6 +117,8 @@ module cda.app.controller {
       this.$userService.getUser(this.$scope.userId).then((user) => {
         this.$scope.user = user;
         this.$scope.selectedGroupId = user.groupId;
+        this.$scope.orgName = user.orgName;
+        this.$scope.positionName = user.positionName;
       });
     }
 
@@ -196,8 +210,12 @@ module cda.app.controller {
       this.$scope.isEditGroup = isEditGroup;
     }
 
-    isEditGroup(): boolean {
-      return this.$scope.isEditGroup;
+    setEditOrgName(isEditOrgName: boolean): void {
+      this.$scope.isEditOrgName = isEditOrgName;
+    }
+
+    setEditPositionName(isEditPositionName: boolean): void {
+      this.$scope.isEditPositionName = isEditPositionName;
     }
 
     saveUserGroup(): void {
@@ -210,6 +228,20 @@ module cda.app.controller {
           }
         }
         this.setEditGroup(false);
+      });
+    }
+
+    saveOrgName(): void {
+      this.$userService.setOrgName(this.$scope.userId, this.$scope.orgName).then(()=> {
+        this.$scope.user.orgName = this.$scope.orgName;
+        this.setEditOrgName(false);
+      });
+    }
+
+    savePositionName(): void {
+      this.$userService.setPositionName(this.$scope.userId, this.$scope.positionName).then(()=> {
+        this.$scope.user.positionName = this.$scope.positionName;
+        this.setEditPositionName(false);
       });
     }
   }

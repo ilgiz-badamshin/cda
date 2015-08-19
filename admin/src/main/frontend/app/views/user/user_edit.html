@@ -50,23 +50,67 @@
             </div>
 
             <div class="profile-info-row">
-              <div class="profile-info-name">orgName</div>
+              <div class="profile-info-name"> orgName</div>
               <div class="profile-info-value">
-                {{user.orgName}}
+                <div ng-show="!isEditOrgName">
+                  <span>{{user.orgName}}</span>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.setEditOrgName(true)">
+                      <i class="ace-icon fa fa-edit"></i>
+                    </button>
+                  </div>
+                </div>
+                <div ng-show="isEditOrgName" class="control-group form-group">
+                  <div class="editable-input">
+                    <input class="form-control" ng-model="orgName">
+                  </div>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-info editable-submit" ng-click="ctrl.saveOrgName()">
+                      <i class="ace-icon fa fa-check"></i>
+                    </button>
+                    <button type="button" class="btn editable-cancel" ng-click="ctrl.setEditOrgName(false)">
+                      <i class="ace-icon fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="profile-info-row">
               <div class="profile-info-name"> positionName</div>
               <div class="profile-info-value">
-                {{user.positionName}}
+                <div ng-show="!isEditPositionName">
+                  <span>{{user.positionName}}</span>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.setEditPositionName(true)">
+                      <i class="ace-icon fa fa-edit"></i>
+                    </button>
+                  </div>
+                </div>
+                <div ng-show="isEditPositionName" class="control-group form-group">
+                  <div class="editable-input">
+                    <input class="form-control" ng-model="positionName">
+                  </div>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-info editable-submit" ng-click="ctrl.savePositionName()">
+                      <i class="ace-icon fa fa-check"></i>
+                    </button>
+                    <button type="button" class="btn editable-cancel" ng-click="ctrl.setEditPositionName(false)">
+                      <i class="ace-icon fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="profile-info-row">
               <div class="profile-info-name"> group</div>
               <div class="profile-info-value">
-                <div ng-show="!ctrl.isEditGroup()">
+                <div ng-show="!isEditGroup">
                   <span>{{user.group.name}}</span>
 
                   <div class="editable-buttons">
@@ -75,7 +119,7 @@
                     </button>
                   </div>
                 </div>
-                <div ng-show="ctrl.isEditGroup()" class="control-group form-group">
+                <div ng-show="isEditGroup" class="control-group form-group">
                   <div class="editable-input">
                     <select class="form-control" ng-options="group.id as group.name for group in groups"
                             ng-model="selectedGroupId"></select>

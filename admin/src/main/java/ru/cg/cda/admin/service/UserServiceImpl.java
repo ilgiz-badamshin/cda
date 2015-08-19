@@ -108,6 +108,12 @@ public class UserServiceImpl implements UserService {
     }
   }
 
+  @Override
+  public Boolean deleteAvatar(Long userId) {
+    File file = new File(AVATARS_FOLDER, userId + ".png");
+    return !file.exists() || file.delete();
+  }
+
   public UserDTO convertUser(User user) {
     if (user == null) {
       return null;

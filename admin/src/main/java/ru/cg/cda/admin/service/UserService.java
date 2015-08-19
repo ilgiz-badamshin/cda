@@ -30,5 +30,7 @@ public interface UserService {
 
   void saveAvatar(Long userId, String avatar);
 
+  Boolean deleteAvatar(Long userId);
+
   File getAvatar(Long userId);
 }

@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
   public UserDTO getUser(Long userId) {
     List<Long> visibleUserIds = roleDao.visibleUserIds(RestParamStorage.getCurrrentUserId());
-    Boolean isVisible = visibleUserIds.contains(userId) || Objects.equals(userId, RestParamStorage.getCurrrentUserId());
+    Boolean isVisible = visibleUserIds.contains(userId) && !Objects.equals(userId, RestParamStorage.getCurrrentUserId());
     return convertUser(userDao.get(userId), isVisible);
   }
 

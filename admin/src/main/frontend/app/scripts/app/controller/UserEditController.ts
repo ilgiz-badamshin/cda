@@ -102,15 +102,30 @@ module cda.app.controller {
 
       this.modalServiceInstance.result.then((refresh: boolean) => {
         if (refresh) {
-          this.$scope.user.avatarUrl = this.$scope.user.avatarUrl + '?' + new Date().getTime();
+          this.refreshAvatar();
         }
       });
     }
 
-    private refreshAfterModalClose(refresh: boolean) {
-      if (refresh) {
-        alert('refresh image');
+    deleteAvatar(): void {
+      if (confirm("Удалить аватар?")) {
+        this.$userService.deleteAvatar(this.$scope.userId).then(
+          (deleted: boolean)=> {
+            if (deleted) {
+              this.refreshAvatar();
+            }
+            else {
+              alert('Ошибка удаления');
+            }
+          },
+          ()=> {
+            alert('Произошла непредвиденная ошибка');
+          });
       }
+    }
+
+    private refreshAvatar() {
+      this.$scope.user.avatarUrl = this.$scope.user.avatarUrl + '?' + new Date().getTime();
     }
 
     loadUser(): void {
@@ -136,7 +151,7 @@ module cda.app.controller {
           this.$scope.roles = roles;
           this.loadUserRoleIds()
         },
-        ()=> alert('Error getRoles')
+        ()=> alert('Произошла непредвиденная ошибка')
       );
     }
 
@@ -146,7 +161,7 @@ module cda.app.controller {
           this.$scope.roleIds = roleIds;
           this.startWatch();
         },
-        ()=> alert('Error getUserRoleIds')
+        ()=> alert('Произошла непредвиденная ошибка')
       );
     }
 
@@ -182,7 +197,7 @@ module cda.app.controller {
           }
         },
         ()=> {
-          alert('Ошибка');
+          alert('Произошла непредвиденная ошибка');
         });
     }
 
@@ -202,7 +217,7 @@ module cda.app.controller {
           }
         },
         ()=> {
-          alert('Ошибка');
+          alert('Произошла непредвиденная ошибка');
         });
     }
 

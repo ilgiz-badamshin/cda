@@ -72,6 +72,11 @@ public class UserController {
     userService.setPositionName(userId, positionName);
   }
 
+  @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.DELETE)
+  public Boolean setAvatar(@PathVariable Long userId) {
+    return userService.deleteAvatar(userId);
+  }
+
   @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.POST)
   public void setAvatar(@PathVariable Long userId, @RequestBody String image) {
     userService.saveAvatar(userId, image);

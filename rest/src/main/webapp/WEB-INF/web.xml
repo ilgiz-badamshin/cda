@@ -81,7 +81,7 @@
   <!--userId Injection filter-->
   <filter>
     <filter-name>restUserIdInjectFilter</filter-name>
-    <filter-class>ru.cg.cda.rest.filter.RestUserIdInjectFilter</filter-class>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     <async-supported>true</async-supported>
     <init-param>
       <param-name>excludePatterns</param-name>

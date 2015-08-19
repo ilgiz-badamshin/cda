@@ -12,7 +12,6 @@ import ru.cg.cda.database.dao.GroupDao;
 import ru.cg.cda.database.dao.RoleDao;
 import ru.cg.cda.rest.dto.GroupDTO;
 import ru.cg.cda.rest.dto.UserDTO;
-import ru.cg.cda.rest.exception.GroupAccessException;
 import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
@@ -29,16 +28,13 @@ public class GroupServiceImpl implements GroupService {
   private UserService userService;
 
   public GroupDTO getGroup(Long groupId) {
-    List<Long> visibleIds = roleDao.visibleGroupIds(RestParamStorage.getCurrrentUserId());
-    if (!visibleIds.contains(groupId)) {
-      throw new GroupAccessException("Нет доступа к группе");
-    }
-    return convertGroup(groupDao.get(groupId));
+    List<Long> visibleGroupIds = roleDao.visibleGroupIds(RestParamStorage.getCurrrentUserId());
+    return convertGroup(groupDao.get(groupId), visibleGroupIds.contains(groupId));
   }
 
   @Override
   public List<GroupDTO> getGroups() {
-    List<Group> groups = groupDao.visibleGroups(RestParamStorage.getCurrrentUserId());
+    List<Group> groups = groupDao.loadAll();
     return convertGroups(groups);
   }
 
@@ -48,7 +44,7 @@ public class GroupServiceImpl implements GroupService {
   }
 
 
-  private GroupDTO convertGroup(Group group) {
+  private GroupDTO convertGroup(Group group, Boolean isVisible) {
     List<UserDTO> userDTOs = userService.convertUsers(group.getUsers());
     if (userDTOs.size() == 0) {
       return null;
@@ -57,13 +53,15 @@ public class GroupServiceImpl implements GroupService {
     groupDTO.setId(group.getId());
     groupDTO.setName(group.getName());
     groupDTO.setUsers(userDTOs);
+    groupDTO.setIsVisible(isVisible);
     return groupDTO;
   }
 
   public List<GroupDTO> convertGroups(List<Group> groups) {
     List<GroupDTO> result = new ArrayList<>();
+    List<Long> visibleGroupIds = roleDao.visibleGroupIds(RestParamStorage.getCurrrentUserId());
     for (Group group : groups) {
-      GroupDTO groupDTO = convertGroup(group);
+      GroupDTO groupDTO = convertGroup(group, visibleGroupIds.contains(group.getId()));
       if (groupDTO != null) {
         result.add(groupDTO);
       }

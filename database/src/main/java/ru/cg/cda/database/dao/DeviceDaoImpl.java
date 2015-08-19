@@ -30,4 +30,10 @@ public class DeviceDaoImpl extends BaseDaoImpl<Device> implements DeviceDao {
     query.setParameterList("skipIds", skipIds);
     return query.executeUpdate();
   }
+
+  @Override
+  public Device getByName(String name) {
+    return (Device) create().add(Restrictions.eq("name", name).ignoreCase()).uniqueResult();
+  }
+
 }

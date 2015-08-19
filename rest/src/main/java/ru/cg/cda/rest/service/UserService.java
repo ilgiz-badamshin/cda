@@ -24,7 +24,7 @@ public interface UserService {
 
   List<UserDTO> convertUsers(List<User> users);
 
-  UserDTO convertUser(User user);
+  UserDTO convertUser(User user, Boolean isVisible);
 
   File getAvatar(Long userId);
 }

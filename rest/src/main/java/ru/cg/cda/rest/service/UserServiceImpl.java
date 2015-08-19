@@ -16,8 +16,6 @@ import ru.cg.cda.database.dao.FavoriteDao;
 import ru.cg.cda.database.dao.RoleDao;
 import ru.cg.cda.database.dao.UserDao;
 import ru.cg.cda.rest.dto.UserDTO;
-import ru.cg.cda.rest.exception.GroupAccessException;
-import ru.cg.cda.rest.exception.UserAccessException;
 import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
@@ -37,18 +35,12 @@ public class UserServiceImpl implements UserService {
   private String AVATARS_FOLDER;
 
   public UserDTO getUser(Long userId) {
-    List<Long> visibleIds = roleDao.visibleUserIds(userId);
-    if (!Objects.equals(userId, RestParamStorage.getCurrrentUserId()) && !visibleIds.contains(userId)) {
-      throw new UserAccessException("Нет прав на просмотр деталей пользователя");
-    }
-    return convertUser(userDao.get(userId));
+    List<Long> visibleUserIds = roleDao.visibleUserIds(RestParamStorage.getCurrrentUserId());
+    Boolean isVisible = visibleUserIds.contains(userId) || Objects.equals(userId, RestParamStorage.getCurrrentUserId());
+    return convertUser(userDao.get(userId), isVisible);
   }
 
   public List<UserDTO> getUsersByGroup(Long groupId) {
-    List<Long> visibleIds = roleDao.visibleGroupIds(RestParamStorage.getCurrrentUserId());
-    if (!visibleIds.contains(groupId)) {
-      throw new GroupAccessException("Нет доступа к группе");
-    }
     return convertUsers(userDao.byGroup(groupId));
   }
 
@@ -83,7 +75,7 @@ public class UserServiceImpl implements UserService {
     return userDao.getInvisibleIds(RestParamStorage.getCurrrentUserId());
   }
 
-  public UserDTO convertUser(User user) {
+  public UserDTO convertUser(User user, Boolean isVisible) {
     if (user == null) {
       return null;
     }
@@ -100,7 +92,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setWorkPhone(user.getWorkPhone());
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
-
+    userDTO.setIsVisible(isVisible);
     //@TODO убрать ИП из адреса
     userDTO.setAvatarUrl("http://10.10.18.34:8080/rest/public/avatar/" + user.getId().toString());
     //@TODO сделать методы
@@ -111,11 +103,14 @@ public class UserServiceImpl implements UserService {
 
   public List<UserDTO> convertUsers(List<User> users) {
     List<UserDTO> result = new ArrayList<>();
+    List<Long> visibleUserIds = roleDao.visibleUserIds(RestParamStorage.getCurrrentUserId());
     for (User user : users) {
+      //skip current user
       if (Objects.equals(user.getId(), RestParamStorage.getCurrrentUserId())) {
         continue;
       }
-      result.add(convertUser(user));
+
+      result.add(convertUser(user, visibleUserIds.contains(user.getId())));
     }
     return result;
   }

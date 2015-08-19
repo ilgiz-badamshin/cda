@@ -13,4 +13,6 @@ public interface DeviceDao extends BaseDao<Device> {
   Integer deleteAll();
 
   Integer deleteAllExcept(List<Long> skipIds);
+
+  Device getByName(String name);
 }

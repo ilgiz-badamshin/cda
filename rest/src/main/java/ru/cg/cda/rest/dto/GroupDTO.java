@@ -10,6 +10,7 @@ public class GroupDTO {
   private Long id;
   private String name;
   private List<UserDTO> Users = new ArrayList<>();
+  private Boolean isVisible;
 
   public Long getId() {
     return id;
@@ -33,5 +34,13 @@ public class GroupDTO {
 
   public void setUsers(List<UserDTO> users) {
     Users = users;
+  }
+
+  public Boolean getIsVisible() {
+    return isVisible;
+  }
+
+  public void setIsVisible(Boolean isVisible) {
+    this.isVisible = isVisible;
   }
 }

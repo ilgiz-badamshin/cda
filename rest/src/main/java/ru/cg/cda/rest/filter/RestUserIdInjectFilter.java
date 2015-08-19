@@ -3,26 +3,39 @@ package ru.cg.cda.rest.filter;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.GenericFilterBean;
 
+import ru.cg.cda.database.bean.Device;
 import ru.cg.cda.rest.exception.UnknownUserException;
+import ru.cg.cda.rest.service.DeviceService;
 import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
  * @author Badamshin
  */
-@Component
-public class RestUserIdInjectFilter implements Filter {
+@Component(value = "restUserIdInjectFilter")
+public class RestUserIdInjectFilter extends GenericFilterBean {
 
   private static final String USER_ID = "UserId";
+  private static final String MAC_ADDRESS = "MacAddress";
   private String excludePatterns;
+  @Autowired
+  private DeviceService deviceService;
 
-  @Override
-  public void init(FilterConfig cfg) throws ServletException {
-    this.excludePatterns = cfg.getInitParameter("excludePatterns");
+  public String getExcludePatterns() {
+    return excludePatterns;
+  }
+
+  public void setExcludePatterns(String excludePatterns) {
+    this.excludePatterns = excludePatterns;
   }
 
   @Override
@@ -32,7 +45,7 @@ public class RestUserIdInjectFilter implements Filter {
     if (!matchExcludePatterns(url)) {
 
       HttpServletRequest httpRequest = this.getAsHttpRequest(request);
-      Long userId = extractProjectIdFromRequest(httpRequest);
+      Long userId = extractUserIdFromRequest(httpRequest);
 
       if (userId != null) {
         //Вяжем к текущему потоку ID пользователя
@@ -58,15 +71,21 @@ public class RestUserIdInjectFilter implements Filter {
     return (HttpServletRequest) request;
   }
 
-  private Long extractProjectIdFromRequest(HttpServletRequest httpRequest) {
-    /* Get projectID from header */
-    String userId = httpRequest.getHeader(USER_ID);
-
-    try {
-      return userId != null ? Long.valueOf(userId) : null;
+  private Long extractUserIdFromRequest(HttpServletRequest httpRequest) {
+    /* Get userId from header */
+    String macAddress = httpRequest.getHeader(MAC_ADDRESS);
+    if (macAddress != null) {
+      Device device = deviceService.getByName("SEP" + macAddress);
+      return device != null ? device.getUserId() : null;
     }
-    catch (NumberFormatException ex) {
-      throw new RuntimeException(ex.getMessage(), ex);
+    else {
+      String userId = httpRequest.getHeader(USER_ID);
+      try {
+        return userId != null ? Long.valueOf(userId) : null;
+      }
+      catch (NumberFormatException ex) {
+        throw new RuntimeException(ex.getMessage(), ex);
+      }
     }
   }
 

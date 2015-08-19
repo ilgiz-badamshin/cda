@@ -21,6 +21,7 @@ public class UserDTO {
   private String positionName;
   private String avatarUrl;
   private Boolean isFavorite;
+  private Boolean isVisible;
   private AccessLevel accessLevel;
   private UserStatus userStatus;
 
@@ -150,5 +151,13 @@ public class UserDTO {
 
   public void setUserStatus(UserStatus userStatus) {
     this.userStatus = userStatus;
+  }
+
+  public Boolean getIsVisible() {
+    return isVisible;
+  }
+
+  public void setIsVisible(Boolean isVisible) {
+    this.isVisible = isVisible;
   }
 }

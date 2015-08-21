@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ru.cg.cda.rest.dto.HistoryDTO;
 import ru.cg.cda.rest.service.HistoryService;
+import ru.cg.cda.rest.storage.RestParamStorage;
 
 /**
  * @author Badamshin
@@ -83,6 +84,7 @@ public class HistoryController {
    */
   @RequestMapping(value = "", method = RequestMethod.POST)
   public void addHistory(@RequestBody HistoryDTO historyDTO) {
+    historyDTO.setUserId(RestParamStorage.getCurrrentUserId());
     historyService.addHistory(historyDTO);
   }
 }

@@ -14,8 +14,12 @@ import ru.cg.cda.database.bean.Device;
 @Repository
 public class DeviceDaoImpl extends BaseDaoImpl<Device> implements DeviceDao {
   @Override
-  public Device getByUdsId(String udsId) {
-    return (Device) create().add(Restrictions.eq("udsId", udsId).ignoreCase()).uniqueResult();
+  public Device getByUdsIdOrName(String udsId, String name) {
+    return (Device) create().add(
+        Restrictions.or(
+            Restrictions.eq("udsId", udsId).ignoreCase(),
+            Restrictions.eq("name", name).ignoreCase()
+        )).uniqueResult();
   }
 
   @Override

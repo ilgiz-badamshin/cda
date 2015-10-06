@@ -36,7 +36,7 @@ public class UserSyncServiceImpl implements UserSyncService {
   private UdsService udsService;
 
   public void sync() {
-    logger.debug("Sync user start");
+    logger.info("Sync user start");
     List<UdsUser> udsUsers = udsService.getUsers();
     List<Long> userIds = new ArrayList<>();
     Boolean updateDbVersion = false;

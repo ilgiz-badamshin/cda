@@ -22,7 +22,7 @@ public class Scheduler {
   @Autowired
   DeviceSyncService deviceSyncService;
 
-  @Scheduled(fixedDelay = 1800000)
+  @Scheduled(fixedDelay = 60000)
   public void syncUds() {
     userSyncService.sync();
     deviceSyncService.sync();

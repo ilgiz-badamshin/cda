@@ -8,7 +8,7 @@ import ru.cg.cda.database.bean.Device;
  * @author Badamshin
  */
 public interface DeviceDao extends BaseDao<Device> {
-  Device getByUdsId(String udsId);
+  Device getByUdsIdOrName(String udsId, String name);
 
   Integer deleteAll();
 

@@ -16,10 +16,10 @@
     <param-value>/WEB-INF/applicationContext.xml</param-value>
   </context-param>
 
-  <!--<context-param>-->
-  <!--<param-name>log4jConfigLocation</param-name>-->
-  <!--<param-value>/WEB-INF/log4j.xml</param-value>-->
-  <!--</context-param>-->
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/log4j.xml</param-value>
+  </context-param>
 
   <servlet>
     <servlet-name>dispatcher</servlet-name>
@@ -83,10 +83,6 @@
     <filter-name>restUserIdInjectFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     <async-supported>true</async-supported>
-    <init-param>
-      <param-name>excludePatterns</param-name>
-      <param-value>/public/*</param-value>
-    </init-param>
   </filter>
 
   <filter-mapping>
@@ -122,7 +118,7 @@
   <listener>
     <listener-class>liquibase.integration.servlet.LiquibaseServletListener</listener-class>
   </listener>
-  <!--<listener>-->
-  <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
-  <!--</listener>-->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
 </web-app>

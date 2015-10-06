@@ -26,17 +26,9 @@ public class RestUserIdInjectFilter extends GenericFilterBean {
 
   private static final String USER_ID = "UserId";
   private static final String MAC_ADDRESS = "MacAddress";
-  private String excludePatterns;
+  private static String EXCLUDE_PATTERNS = "/public/*";
   @Autowired
   private DeviceService deviceService;
-
-  public String getExcludePatterns() {
-    return excludePatterns;
-  }
-
-  public void setExcludePatterns(String excludePatterns) {
-    this.excludePatterns = excludePatterns;
-  }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -90,10 +82,7 @@ public class RestUserIdInjectFilter extends GenericFilterBean {
   }
 
   private Boolean matchExcludePatterns(String url) {
-    if (excludePatterns == null || excludePatterns.isEmpty()) {
-      return false;
-    }
-    Pattern pattern = Pattern.compile(excludePatterns);
+    Pattern pattern = Pattern.compile(EXCLUDE_PATTERNS);
     Matcher matcher = pattern.matcher(url);
     return matcher.find();
   }

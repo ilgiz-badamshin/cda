@@ -36,7 +36,7 @@ public class DeviceSyncServiceImpl implements DeviceSyncService {
   private AxlService axlService;
 
   public void sync() {
-    logger.debug("Sync device start");
+    logger.info("Sync device start");
     List<AxlDevice> axlDevices = axlService.getDevices();
     List<Long> deviceIds = new ArrayList<>();
     Boolean updateDbVersion = false;
@@ -45,7 +45,7 @@ public class DeviceSyncServiceImpl implements DeviceSyncService {
         logger.debug("Device without user. Device name {}, device ID {}", axlDevice.getName(), axlDevice.getId());
         continue;
       }
-      Device device = deviceDao.getByUdsId(axlDevice.getId());
+      Device device = deviceDao.getByUdsIdOrName(axlDevice.getId(), axlDevice.getName());
       if (device == null) {
         device = new Device();
         device.setInsertedAt(new Date());

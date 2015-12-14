@@ -221,7 +221,10 @@
     <profile>
       <id>prod_config</id>
       <properties>
-        <uds.url>https://10.10.13.10:8443</uds.url>
+        <!-- старый сервер CM-->
+        <!--<uds.url>https://cucm10.demo.local:8443</uds.url>-->
+        <!-- новый сервер CM-->
+        <uds.url>https://vcscm.vcs.citrt.ru:8443</uds.url>
         <avatars.folder>C:\\server\\avatars</avatars.folder>
       </properties>
     </profile>

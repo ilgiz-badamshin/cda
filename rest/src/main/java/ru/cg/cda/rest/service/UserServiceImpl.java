@@ -93,8 +93,9 @@ public class UserServiceImpl implements UserService {
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
     userDTO.setIsVisible(isVisible);
-    //@TODO убрать ИП из адреса
-    userDTO.setAvatarUrl("http://10.10.18.34:8080/rest/public/avatar/" + user.getId().toString());
+    //@TODO заменить на нормальное поле sort
+    userDTO.setSort(user.getVksNumber());
+    userDTO.setAvatarUrl("/rest/public/avatar/" + user.getId().toString());
     //@TODO сделать методы
     userDTO.setIsFavorite(favoriteDao.isFavorite(RestParamStorage.getCurrrentUserId(), user.getId()));
     return userDTO;

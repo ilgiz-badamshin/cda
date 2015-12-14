@@ -3,7 +3,6 @@ package ru.cg.cda.admin.service;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -133,7 +132,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setPositionName(user.getPositionName());
     userDTO.setDeleted(user.getDeleted());
     //@TODO убрать ИП из адреса
-    userDTO.setAvatarUrl(MessageFormat.format("/admin/rest/user/{0}/avatar/", user.getId()));
+    userDTO.setAvatarUrl("/admin/rest/user/" + user.getId() + "/avatar/");
     //@TODO сделать методы
 //    userDTO.setIsFavorite(favoriteDao.isFavorite(RestParamStorage.getCurrrentUserId(), user.getId()));
     userDTO.setGroup(groupService.convertGroup(user.getGroup()));

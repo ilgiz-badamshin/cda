@@ -20,6 +20,7 @@ public class UserDTO {
   private String orgName;
   private String positionName;
   private String avatarUrl;
+  private String sort;
   private Boolean isFavorite;
   private Boolean isVisible;
   private AccessLevel accessLevel;
@@ -159,5 +160,13 @@ public class UserDTO {
 
   public void setIsVisible(Boolean isVisible) {
     this.isVisible = isVisible;
+  }
+
+  public String getSort() {
+    return sort;
+  }
+
+  public void setSort(String sort) {
+    this.sort = sort;
   }
 }

@@ -17,9 +17,11 @@ module cda.app.controller {
     selectedGroupId: number;
     orgName: string;
     positionName: string;
+    sort: number;
     isEditGroup: boolean;
     isEditOrgName: boolean;
     isEditPositionName: boolean;
+    isEditSort: boolean;
   }
 
   export interface IUserEditController {
@@ -51,6 +53,10 @@ module cda.app.controller {
 
     savePositionName(): void;
 
+    setEditSort(isEditSort: boolean): void;
+
+    saveSort(): void;
+
     startWatch() : void;
   }
 
@@ -70,6 +76,7 @@ module cda.app.controller {
       $scope.isEditGroup = false;
       $scope.isEditOrgName = false;
       $scope.isEditPositionName = false;
+      $scope.isEditSort = false;
 
       this.loadUser();
       this.loadGroups();
@@ -129,11 +136,13 @@ module cda.app.controller {
     }
 
     loadUser(): void {
+      this.loadGroups();
       this.$userService.getUser(this.$scope.userId).then((user) => {
         this.$scope.user = user;
         this.$scope.selectedGroupId = user.groupId;
         this.$scope.orgName = user.orgName;
         this.$scope.positionName = user.positionName;
+        this.$scope.sort = user.sort;
       });
     }
 
@@ -233,17 +242,30 @@ module cda.app.controller {
       this.$scope.isEditPositionName = isEditPositionName;
     }
 
+    setEditSort(isEditSort: boolean): void {
+      this.$scope.isEditSort = isEditSort;
+    }
+
     saveUserGroup(): void {
-      this.$userService.setGroup(this.$scope.userId, this.$scope.selectedGroupId).then(()=> {
-        for (var i = 0; i < this.$scope.groups.length; i++) {
-          if (this.$scope.groups[i].id == this.$scope.selectedGroupId) {
-            this.$scope.user.groupId = this.$scope.selectedGroupId;
-            this.$scope.user.group = this.$scope.groups[i];
-            break;
+      if (this.$scope.selectedGroupId == null) {
+        this.$userService.deleteGroup(this.$scope.userId).then(()=> {
+          this.$scope.user.groupId = null;
+          this.$scope.user.group = null;
+          this.setEditGroup(false);
+        });
+      }
+      else {
+        this.$userService.setGroup(this.$scope.userId, this.$scope.selectedGroupId).then(()=> {
+          for (var i = 0; i < this.$scope.groups.length; i++) {
+            if (this.$scope.groups[i].id == this.$scope.selectedGroupId) {
+              this.$scope.user.groupId = this.$scope.selectedGroupId;
+              this.$scope.user.group = this.$scope.groups[i];
+              break;
+            }
           }
-        }
-        this.setEditGroup(false);
-      });
+          this.setEditGroup(false);
+        });
+      }
     }
 
     saveOrgName(): void {
@@ -257,6 +279,13 @@ module cda.app.controller {
       this.$userService.setPositionName(this.$scope.userId, this.$scope.positionName).then(()=> {
         this.$scope.user.positionName = this.$scope.positionName;
         this.setEditPositionName(false);
+      });
+    }
+
+    saveSort(): void {
+      this.$userService.setSort(this.$scope.userId, this.$scope.sort).then(()=> {
+        this.$scope.user.sort = this.$scope.sort;
+        this.setEditSort(false);
       });
     }
   }

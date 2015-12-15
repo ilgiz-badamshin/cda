@@ -11,7 +11,7 @@ public class GroupDTO {
   private String name;
   private List<UserDTO> Users = new ArrayList<>();
   private Boolean isVisible;
-  private String sort;
+  private Long sort;
 
   public Long getId() {
     return id;
@@ -45,11 +45,11 @@ public class GroupDTO {
     this.isVisible = isVisible;
   }
 
-  public String getSort() {
+  public Long getSort() {
     return sort;
   }
 
-  public void setSort(String sort) {
+  public void setSort(Long sort) {
     this.sort = sort;
   }
 }

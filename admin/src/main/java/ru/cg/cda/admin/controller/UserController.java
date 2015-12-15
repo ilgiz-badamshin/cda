@@ -62,6 +62,11 @@ public class UserController {
     userService.setGroup(userId, groupId);
   }
 
+  @RequestMapping(value = "/{userId}/group", method = RequestMethod.DELETE)
+  public void removeGroupId(@PathVariable Long userId) {
+    userService.setGroup(userId, null);
+  }
+
   @RequestMapping(value = "/{userId}/orgName", method = RequestMethod.POST)
   public void setOrgName(@PathVariable Long userId, @RequestBody String orgName) {
     userService.setOrgName(userId, orgName);
@@ -70,6 +75,11 @@ public class UserController {
   @RequestMapping(value = "/{userId}/positionName", method = RequestMethod.POST)
   public void setPositionName(@PathVariable Long userId, @RequestBody String positionName) {
     userService.setPositionName(userId, positionName);
+  }
+
+  @RequestMapping(value = "/{userId}/sort", method = RequestMethod.POST)
+  public void setSort(@PathVariable Long userId, @RequestBody Long sort) {
+    userService.setSort(userId, sort);
   }
 
   @RequestMapping(value = "/{userId}/avatar", method = RequestMethod.DELETE)

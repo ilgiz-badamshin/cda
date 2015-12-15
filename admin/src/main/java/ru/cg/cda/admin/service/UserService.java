@@ -28,6 +28,8 @@ public interface UserService {
 
   void setPositionName(Long userId, String positionName);
 
+  void setSort(Long userId, Long sort);
+
   void saveAvatar(Long userId, String avatar);
 
   Boolean deleteAvatar(Long userId);

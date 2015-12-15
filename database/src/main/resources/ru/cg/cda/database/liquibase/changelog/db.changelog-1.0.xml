@@ -126,4 +126,18 @@
       </addColumn>
     </rollback>
   </changeSet>
+
+  <changeSet id="008" author="badamshin">
+    <addColumn tableName="user">
+      <column name="sort" type="bigint" remarks="Сортировка"/>
+    </addColumn>
+    <addColumn tableName="group">
+      <column name="sort" type="bigint" remarks="Сортировка"/>
+    </addColumn>
+    <sql>UPDATE "user" set sort = (case
+      when vks_number = '' then 99999
+      else vks_number::bigint
+      end)</sql>
+    <sql>UPDATE "group" set sort = id</sql>
+  </changeSet>
 </databaseChangeLog>

@@ -22,6 +22,7 @@ module cda.app.model {
     updatedAt: number;
     deleted: boolean;
     group: Group;
+    sort: number;
   }
 
 }

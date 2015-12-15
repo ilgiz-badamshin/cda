@@ -6,6 +6,7 @@ module cda.app.model {
   export class Group {
     id: number;
     name: string;
+    sort: number;
   }
 
 }

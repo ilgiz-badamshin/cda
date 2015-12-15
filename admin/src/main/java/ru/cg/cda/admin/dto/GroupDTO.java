@@ -9,6 +9,7 @@ import java.util.List;
 public class GroupDTO {
   private Long id;
   private String name;
+  private Long sort;
   private List<UserDTO> Users = new ArrayList<>();
 
   public Long getId() {
@@ -25,6 +26,14 @@ public class GroupDTO {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Long getSort() {
+    return sort;
+  }
+
+  public void setSort(Long sort) {
+    this.sort = sort;
   }
 
   public List<UserDTO> getUsers() {

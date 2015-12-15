@@ -13,7 +13,7 @@
     "restangular": "~1.5.1",
     "angular-dual-multiselect-directive": "https://github.com/alexklibisz/angular-dual-multiselect-directive.git",
     "angular-bootstrap": "~0.13.3",
-    "angular-ui-grid": "~3.0.4",
+    "angular-ui-grid": "~3.0.7",
     "at-table": "~1.0.5",
     "angular-bootstrap-duallistbox": "~0.1.0",
     "angular-img-cropper": "~1.1.0"

@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService {
   private ParamsService paramsService;
   @Value("${avatarsFolder}")
   private String AVATARS_FOLDER;
+  @Value("${cm.domen}")
+  private String CM_DOMEN;
 
   public List<UserDTO> getUsers() {
     return convertUsers(userDao.loadAll());
@@ -84,6 +86,16 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public void setSort(Long userId, Long sort) {
+    User user = userDao.get(userId);
+    if (user != null) {
+      user.setSort(sort);
+      userDao.saveOrUpdate(user);
+      paramsService.increaseDbVersion();
+    }
+  }
+
+  @Override
   public File getAvatar(Long userId) {
     return new File(AVATARS_FOLDER, userId + ".png");
   }
@@ -121,7 +133,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setId(user.getId());
     userDTO.setGroupId(user.getGroupId());
     userDTO.setUserName(user.getUserName());
-    userDTO.setUserUri(user.getUserName() + "@demo.local");
+    userDTO.setUserUri(user.getUserName() + CM_DOMEN);
     userDTO.setLastName(user.getLastName());
     userDTO.setFirstName(user.getFirstName());
     userDTO.setMiddleName(user.getMiddleName());
@@ -131,6 +143,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
     userDTO.setDeleted(user.getDeleted());
+    userDTO.setSort(user.getSort());
     //@TODO убрать ИП из адреса
     userDTO.setAvatarUrl("/admin/rest/user/" + user.getId() + "/avatar/");
     //@TODO сделать методы

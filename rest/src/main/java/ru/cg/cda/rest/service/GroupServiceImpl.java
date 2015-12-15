@@ -52,10 +52,11 @@ public class GroupServiceImpl implements GroupService {
     GroupDTO groupDTO = new GroupDTO();
     groupDTO.setId(group.getId());
     groupDTO.setName(group.getName());
+    groupDTO.setSort(group.getSort());
     groupDTO.setUsers(userDTOs);
     groupDTO.setIsVisible(isVisible);
     //@TODO нормальное поле sort
-    groupDTO.setSort(group.getId().toString());
+    groupDTO.setSort(group.getSort());
     return groupDTO;
   }
 

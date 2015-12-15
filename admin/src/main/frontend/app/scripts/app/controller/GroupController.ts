@@ -32,6 +32,7 @@ module cda.app.controller {
         paginationPageSizes: [25, 50, 75],
         columnDefs: [
           {field: 'id'},
+          {field: 'sort'},
           {
             field: 'name',
             sort: {

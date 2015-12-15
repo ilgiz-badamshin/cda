@@ -16,6 +16,7 @@ public class Group {
   private String name;
   private Date insertedAt;
   private Date updatedAt;
+  private Long sort;
 
   private List<User> users;
 
@@ -38,7 +39,6 @@ public class Group {
   public void setName(String name) {
     this.name = name;
   }
-
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
   @Where(clause = "deleted != 'true'")
@@ -68,5 +68,14 @@ public class Group {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Column(name = "sort")
+  public Long getSort() {
+    return sort;
+  }
+
+  public void setSort(Long sort) {
+    this.sort = sort;
   }
 }

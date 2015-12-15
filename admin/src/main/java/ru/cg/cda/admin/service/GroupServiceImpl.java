@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.cg.cda.admin.dto.GroupDTO;
 import ru.cg.cda.database.bean.Group;
 import ru.cg.cda.database.dao.GroupDao;
-import ru.cg.cda.database.dao.RoleDao;
 
 /**
  * @author Badamshin
@@ -43,6 +42,7 @@ public class GroupServiceImpl implements GroupService {
       group = groupDao.get(groupDTO.getId());
     }
     group.setName(groupDTO.getName());
+    group.setSort(groupDTO.getSort());
     groupDao.saveOrUpdate(group);
     paramsService.increaseDbVersion();
     return convertGroup(group);
@@ -56,6 +56,7 @@ public class GroupServiceImpl implements GroupService {
     GroupDTO groupDTO = new GroupDTO();
     groupDTO.setId(group.getId());
     groupDTO.setName(group.getName());
+    groupDTO.setSort(group.getSort());
     return groupDTO;
   }
 

@@ -20,6 +20,7 @@
           <span class="profile-picture">
             <img class="editable img-responsive" ng-src="{{user.avatarUrl}}">
           </span>
+
           <div class="space space-4"></div>
           <button class="btn btn-sm btn-block btn-success" ng-click="ctrl.openEditAvatar()">
             <i class="ace-icon fa fa-plus-circle bigger-120"></i>
@@ -126,14 +127,47 @@
                 <div ng-show="isEditGroup" class="control-group form-group">
                   <div class="editable-input">
                     <select class="form-control" ng-options="group.id as group.name for group in groups"
-                            ng-model="selectedGroupId"></select>
+                            ng-model="selectedGroupId">
+                      <option value=""></option>
+                    </select>
                   </div>
 
                   <div class="editable-buttons">
                     <button type="button" class="btn btn-info editable-submit" ng-click="ctrl.saveUserGroup()">
-                      <i class="ace-icon fa fa-check"></i>
+                      <i class="ace-ico
+                      n fa fa-check"></i>
                     </button>
                     <button type="button" class="btn editable-cancel" ng-click="ctrl.setEditGroup(false)">
+                      <i class="ace-icon fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="profile-info-row">
+              <div class="profile-info-name">Порядковый номер</div>
+              <div class="profile-info-value">
+                <div ng-show="!isEditSort">
+                  <span>{{user.sort}}</span>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.setEditSort(true)">
+                      <i class="ace-icon fa fa-edit"></i>
+                    </button>
+                  </div>
+                </div>
+                <div ng-show="isEditSort" class="control-group form-group">
+                  <div class="editable-input">
+                    <input class="form-control" ng-model="sort" type="number">
+                  </div>
+
+                  <div class="editable-buttons">
+                    <button type="button" class="btn btn-info editable-submit" ng-click="ctrl.saveSort()">
+                      <i class="ace-icon fa fa-check"></i>
+                    </button>
+                    <button type="button" class="btn editable-cancel" ng-click="ctrl.setEditSort(false)">
                       <i class="ace-icon fa fa-times"></i>
                     </button>
                   </div>

@@ -26,6 +26,7 @@ public class User {
   private Date insertedAt;
   private Date updatedAt;
   private Boolean deleted;
+  private Long sort;
 
   private List<User> favorites;
   private Group group;
@@ -198,5 +199,14 @@ public class User {
 
   public void setDeleted(Boolean deleted) {
     this.deleted = deleted;
+  }
+
+  @Column(name = "sort")
+  public Long getSort() {
+    return sort;
+  }
+
+  public void setSort(Long sort) {
+    this.sort = sort;
   }
 }

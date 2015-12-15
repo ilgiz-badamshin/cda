@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService {
   private FavoriteDao favoriteDao;
   @Value("${avatarsFolder}")
   private String AVATARS_FOLDER;
+  @Value("${cm.domen}")
+  private String CM_DOMEN;
 
   public UserDTO getUser(Long userId) {
     List<Long> visibleUserIds = roleDao.visibleUserIds(RestParamStorage.getCurrrentUserId());
@@ -83,7 +85,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setId(user.getId());
     userDTO.setGroupId(user.getGroupId());
     userDTO.setUserName(user.getUserName());
-    userDTO.setUserUri(user.getUserName() + "@demo.local");
+    userDTO.setUserUri(user.getUserName() + CM_DOMEN);
     userDTO.setLastName(user.getLastName());
     userDTO.setFirstName(user.getFirstName());
     userDTO.setMiddleName(user.getMiddleName());
@@ -93,8 +95,7 @@ public class UserServiceImpl implements UserService {
     userDTO.setOrgName(user.getOrgName());
     userDTO.setPositionName(user.getPositionName());
     userDTO.setIsVisible(isVisible);
-    //@TODO заменить на нормальное поле sort
-    userDTO.setSort(user.getVksNumber());
+    userDTO.setSort(user.getSort());
     userDTO.setAvatarUrl("/rest/public/avatar/" + user.getId().toString());
     //@TODO сделать методы
     userDTO.setIsFavorite(favoriteDao.isFavorite(RestParamStorage.getCurrrentUserId(), user.getId()));

@@ -216,6 +216,7 @@
       <properties>
         <uds.url>https://10.10.18.34:8443</uds.url>
         <avatars.folder>/home/ilgiz/cda-avatars</avatars.folder>
+        <cm.domen>@vcs.citrt.ru</cm.domen>
       </properties>
     </profile>
     <profile>
@@ -226,6 +227,7 @@
         <!-- новый сервер CM-->
         <uds.url>https://vcscm.vcs.citrt.ru:8443</uds.url>
         <avatars.folder>C:\\server\\avatars</avatars.folder>
+        <cm.domen>@vcs.citrt.ru</cm.domen>
       </properties>
     </profile>
   </profiles>

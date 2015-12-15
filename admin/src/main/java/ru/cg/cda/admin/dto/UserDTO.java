@@ -20,6 +20,7 @@ public class UserDTO {
   private Boolean deleted;
   private Boolean isFavorite;
   private GroupDTO group;
+  private Long sort;
 
   public Long getId() {
     return id;
@@ -147,5 +148,13 @@ public class UserDTO {
 
   public void setDeleted(Boolean deleted) {
     this.deleted = deleted;
+  }
+
+  public Long getSort() {
+    return sort;
+  }
+
+  public void setSort(Long sort) {
+    this.sort = sort;
   }
 }

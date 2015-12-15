@@ -29,6 +29,7 @@ module cda.app.controller {
         paginationTemplate: "views/main/ui-grid-paging.html",
         paginationPageSize: 25,
         paginationPageSizes: [25, 50, 75],
+        enableColumnResizing: true,
         columnDefs: [
           {field: 'id'},
           {field: 'sort'},

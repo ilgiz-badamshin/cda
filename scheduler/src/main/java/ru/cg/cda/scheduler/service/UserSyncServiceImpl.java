@@ -105,7 +105,7 @@ public class UserSyncServiceImpl implements UserSyncService {
     if (!ObjectUtils.equals(user.getWorkPhone(), udsUser.getHomeNumber())) {
       return true;
     }
-    if ( user.getDeleted()) {
+    if (user.getDeleted()) {
       return true;
     }
     return false;

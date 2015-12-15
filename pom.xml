@@ -222,11 +222,12 @@
     <profile>
       <id>prod_config</id>
       <properties>
+        <avatars.folder>C:\\server\\avatars</avatars.folder>
         <!-- старый сервер CM-->
         <!--<uds.url>https://cucm10.demo.local:8443</uds.url>-->
+        <!--<cm.domen>@cucm10.demo.local</cm.domen>-->
         <!-- новый сервер CM-->
         <uds.url>https://vcscm.vcs.citrt.ru:8443</uds.url>
-        <avatars.folder>C:\\server\\avatars</avatars.folder>
         <cm.domen>@vcs.citrt.ru</cm.domen>
       </properties>
     </profile>

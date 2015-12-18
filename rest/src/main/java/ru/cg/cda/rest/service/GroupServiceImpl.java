@@ -55,8 +55,6 @@ public class GroupServiceImpl implements GroupService {
     groupDTO.setSort(group.getSort());
     groupDTO.setUsers(userDTOs);
     groupDTO.setIsVisible(isVisible);
-    //@TODO нормальное поле sort
-    groupDTO.setSort(group.getSort());
     return groupDTO;
   }
 

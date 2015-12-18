@@ -16,6 +16,10 @@
       <groupId>ru.cg.cda</groupId>
       <artifactId>database</artifactId>
     </dependency>
+    <dependency>
+      <groupId>ru.cg.cda</groupId>
+      <artifactId>security</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>javax.servlet</groupId>

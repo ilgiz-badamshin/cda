@@ -1,0 +1,102 @@
+/*-- login --*/
+.form-signin {
+    background: #fff;
+    border: 1px solid #b2b6b8;
+    width: 580px;
+    padding: 80px 90px 80px 55px;
+    margin: 90px auto 20px;
+}
+
+.form-signin h1,
+.form-signin h2 {
+    margin-left: 160px;
+    margin-bottom: 20px;
+}
+
+.form-signin .login-btn-box {
+    width: 240px;
+    text-align: right;
+    margin-right: 34px;
+}
+
+.registration-link, .login-link {
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.form-signin .row {
+    margin: 0 0 20px;
+    font-size: 0;
+}
+
+.form-signin label {
+    display: inline-block;
+    width: 160px;
+    color: #565968;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: top;
+    margin-bottom: 0;
+}
+
+.form-signin input {
+    width: 240px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.form-signin .register-btn-box {
+    width: 240px;
+    text-align: right;
+    margin-right: 34px;
+}
+
+.form-signin .has-error .help-block {
+    padding-left: 125px;
+    font-size: 14px;
+}
+
+
+.ace-nav > li > button {
+  background-color: #2e6589;
+  color: #FFF;
+  display: block;
+  line-height: inherit;
+  text-align: center;
+  height: 100%;
+  width: auto;
+  min-width: 50px;
+  padding: 0 8px;
+  position: relative;
+}
+
+.ace-nav > li.light-blue > button {
+  background-color: #62a8d1;
+}
+
+.ace-nav > li.light-blue > button:hover,
+.ace-nav > li.light-blue > button:focus,
+.ace-nav > li.open.light-blue > button  {
+  background-color: #579ec8;
+}
+
+.ace-nav > li.light-blue2 > button {
+  background-color: #42a8e1;
+}
+
+.ace-nav > li.light-blue2 > button:hover,
+.ace-nav > li.light-blue2 > button:focus,
+.ace-nav > li.open.light-blue2 > button {
+  background-color: #359fd9;
+}
+
+.dropdown-light-blue > li:hover > button,
+.dropdown-light-blue > li > button:focus,
+.dropdown-light-blue > li > button:active,
+.dropdown-light-blue > li.active > button,
+.dropdown-light-blue > li.active:hover > button {
+  background: #ecf3f9;
+  color: #445566;
+}

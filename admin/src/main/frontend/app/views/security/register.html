@@ -1,0 +1,65 @@
+<div class="form-signin">
+    <h1>Web-BPM Studio</h1>
+
+    <form name="registerForm" novalidate>
+        <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+
+        <h2>Регистрация</h2>
+
+        <div class="row"
+             ng-class="{ 'has-error' : registerForm.fullName.$invalid && registerForm.fullName.$dirty }">
+            <label class="control-label">Имя</label>
+            <input type="text" name="fullName" class="form-control" placeholder="Имя" required autofocus
+                   ng-model="credentials.fullName" maxlength="60">
+            <span class="help-block"
+                  ng-show="registerForm.fullName.$error.required && registerForm.fullName.$dirty">
+                Пожалуйста заполните это поле
+            </span>
+        </div>
+        <div class="row"
+             ng-class="{ 'has-error' : registerForm.username.$invalid && registerForm.username.$dirty }">
+            <label class="control-label">Email</label>
+            <input type="email" name="username" class="form-control" placeholder="Email" required autofocus
+                   ng-model="credentials.username" maxlength="100">
+            <span class="help-block"
+                  ng-show="registerForm.username.$error.required && registerForm.username.$dirty">
+              Пожалуйста заполните это поле
+            </span>
+            <span class="help-block"
+                  ng-show="registerForm.username.$error.email && registerForm.username.$dirty">
+                Пожалуйста введите адрес электронной почты
+            </span>
+        </div>
+        <div class="row"
+             ng-class="{ 'has-error' : registerForm.password.$invalid && registerForm.password.$dirty }">
+            <label class="control-label">Пароль</label>
+            <input type="password" name="password" class="form-control" placeholder="Пароль" required autofocus
+                   ng-model="credentials.password" maxlength="100">
+            <span class="help-block"
+                  ng-show="registerForm.password.$error.required && registerForm.password.$dirty">
+                Пожалуйста заполните это поле
+            </span>
+        </div>
+        <div class="row"
+             ng-class="{ 'has-error' : registerForm.repeatPassword.$invalid && registerForm.repeatPassword.$dirty }">
+            <label class="control-label">Повтор пароля</label>
+            <input type="password" name="repeatPassword" class="form-control" placeholder="Повтор пароля" required
+                   autofocus ng-model="credentials.repeatPassword" ng-match="credentials.password" maxlength="100">
+            <span class="help-block"
+                  ng-show="registerForm.repeatPassword.$error.required && registerForm.repeatPassword.$dirty">
+                Пожалуйста заполните это поле
+            </span>
+            <span class="help-block"
+                  ng-show="registerForm.repeatPassword.$error.match && registerForm.repeatPassword.$dirty">
+                Пароль и Повтор пароля должны совпадать
+            </span>
+        </div>
+
+        <div class="register-btn-box fl-right">
+            <a class="login-link" ng-click="ctrl.goToLogin()" href="">Вход</a>
+            <button class="btn btn-primary" ng-click="ctrl.register(registerForm.$valid , credentials)">
+                Зарегистрироваться
+            </button>
+        </div>
+    </form>
+</div>

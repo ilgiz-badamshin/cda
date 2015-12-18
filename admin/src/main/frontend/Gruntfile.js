@@ -210,6 +210,7 @@ module.exports = function (grunt) {
         src: '<%= yeoman.app %>/index.html',
         blocks: {
           app: {src: 'scripts/app/**/*.js', cwd: '.tmp'},
+          security: {src: 'scripts/security/**/*.js', cwd: '.tmp'}
         }
       }
     },

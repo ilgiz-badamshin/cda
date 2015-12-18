@@ -23,6 +23,7 @@
   <bean id="paramsDao" class="ru.cg.cda.database.dao.ParamsDaoImpl"/>
   <bean id="roleDao" class="ru.cg.cda.database.dao.RoleDaoImpl"/>
   <bean id="userDao" class="ru.cg.cda.database.dao.UserDaoImpl"/>
+  <bean id="securityUserDao" class="ru.cg.cda.database.dao.SecurityUserDaoImpl"/>
 
   <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
     <property name="jndiName" value="java:/CdaDS"/>
@@ -42,6 +43,7 @@
         <value>ru.cg.cda.database.bean.Params</value>
         <value>ru.cg.cda.database.bean.Role</value>
         <value>ru.cg.cda.database.bean.User</value>
+        <value>ru.cg.cda.database.bean.SecurityUser</value>
       </list>
     </property>
     <property name="hibernateProperties">

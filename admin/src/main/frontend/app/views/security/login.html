@@ -1,0 +1,24 @@
+<div class="form-signin">
+    <h1>Сервер контактов</h1>
+
+    <form name="signinForm">
+        <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+
+        <h2>Вход</h2>
+
+        <div class="row" ng-class="{ 'has-error' : signinForm.username.$invalid && signinForm.username.$dirty }">
+            <label>Email</label>
+            <input type="email" name="username" class="form-control" placeholder="Email" required autofocus
+                   ng-model="credentials.username" maxlength="100">
+        </div>
+        <div class="row" ng-class="{ 'has-error' : signinForm.password.$invalid && signinForm.password.$dirty }">
+            <label>Пароль</label>
+            <input type="password" name="password" class="form-control" placeholder="Пароль" required
+                   ng-model="credentials.password" maxlength="100">
+        </div>
+        <div class="login-btn-box fl-right">
+            <button class="btn btn-primary" ng-click="signinForm.$valid && ctrl.login(credentials)">Войти
+            </button>
+        </div>
+    </form>
+</div>

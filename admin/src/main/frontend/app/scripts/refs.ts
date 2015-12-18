@@ -22,4 +22,17 @@
 /// <reference path="app/service/GroupService.ts" />
 /// <reference path="app/service/RoleService.ts" />
 /// <reference path="app/service/UserService.ts" />
+/// <reference path="security/Security.ts" />
+/// <reference path="security/controller/AuthController.ts" />
+/// <reference path="security/controller/LoginController.ts" />
+/// <reference path="security/controller/LogoutController.ts" />
+/// <reference path="security/controller/RegisterController.ts" />
+/// <reference path="security/factory/SecurityRestangular.ts" />
+/// <reference path="security/model/Access.ts" />
+/// <reference path="security/model/Credentials.ts" />
+/// <reference path="security/model/ISecurityScope.ts" />
+/// <reference path="security/model/Session.ts" />
+/// <reference path="security/service/AuthService.ts" />
+/// <reference path="security/service/LoginService.ts" />
+/// <reference path="security/service/SessionStore.ts" />
 //grunt-end

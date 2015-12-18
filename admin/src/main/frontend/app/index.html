@@ -14,6 +14,7 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/security.css">
   <!-- endbuild -->
 
   <!-- bootstrap & fontawesome -->
@@ -34,7 +35,7 @@
 </head>
 <body class="no-skin" ng-app="adminApp" ng-controller="MainCtrl">
 <!-- #section:basics/navbar.layout -->
-<div id="navbar" class="navbar navbar-default">
+<div id="navbar" class="navbar navbar-default"  ng-show="isAuthenticated()">
 
   <div class="navbar-container" id="navbar-container">
     <div class="navbar-header pull-left">
@@ -52,6 +53,8 @@
 
     <!-- /section:basics/navbar.dropdown -->
   </div>
+
+  <div ng-controller="AuthCtrl" log-out class="fl-right"></div>
   <!-- /.navbar-container -->
 </div>
 
@@ -62,14 +65,14 @@
   </script>
 
   <!-- #section:basics/sidebar -->
-  <div id="sidebar" class="sidebar responsive" sidebar>
+  <div id="sidebar" class="sidebar responsive" sidebar ng-show="isAuthenticated()">
 
   </div>
   <!-- /section:basics/sidebar -->
   <div class="main-content">
     <div class="main-content-inner">
       <div class="page-content">
-        <div page-header></div>
+        <div page-header  ng-show="isAuthenticated()"></div>
         <!-- /.page-header -->
         <div class="row">
           <div class="col-xs-12">
@@ -165,6 +168,7 @@
 <script src="bower_components/bootstrap-duallistbox/src/jquery.bootstrap-duallistbox.js"></script>
 <script src="bower_components/angular-bootstrap-duallistbox/dist/angular-bootstrap-duallistbox.js"></script>
 <script src="bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
+<script src="bower_components/autofill-event/src/autofill-event.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -189,8 +193,23 @@
 <script src="scripts/app/controller/DeviceController.js"></script>
 <script src="scripts/app/controller/UserAvatarController.js"></script>
 <!-- endfileblock -->
-<!-- endbuild -->
 
+<!-- fileblock:js security-->
+<script src="scripts/security/Security.js"></script>
+<script src="scripts/security/controller/AuthController.js"></script>
+<script src="scripts/security/controller/LoginController.js"></script>
+<script src="scripts/security/controller/LogoutController.js"></script>
+<script src="scripts/security/controller/RegisterController.js"></script>
+<script src="scripts/security/factory/SecurityRestangular.js"></script>
+<script src="scripts/security/model/Access.js"></script>
+<script src="scripts/security/model/Credentials.js"></script>
+<script src="scripts/security/model/ISecurityScope.js"></script>
+<script src="scripts/security/model/Session.js"></script>
+<script src="scripts/security/service/AuthService.js"></script>
+<script src="scripts/security/service/LoginService.js"></script>
+<script src="scripts/security/service/SessionStore.js"></script>
+<!-- endfileblock -->
+<!-- endbuild -->
 
 <!-- ace scripts -->
 <script src="./assets/js/ace/elements.scroller.js"></script>

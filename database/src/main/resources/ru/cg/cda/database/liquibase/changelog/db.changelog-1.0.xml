@@ -140,4 +140,24 @@
       end)</sql>
     <sql>UPDATE "group" set sort = id</sql>
   </changeSet>
+
+  <changeSet id="009" author="badamshin">
+    <createTable tableName="security_user">
+      <column name="id" type="bigserial" remarks="Идентификатор">
+        <constraints primaryKey="true" primaryKeyName="pk_security_user"/>
+      </column>
+      <column name="username" type="varchar(255)"/>
+      <column name="password" type="varchar(255)"/>
+      <column name="full_name" type="varchar(255)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="010" author="badamshin">
+    <addUniqueConstraint tableName="security_user" columnNames="username"/>
+    <insert tableName="security_user">
+      <column name="full_name">Администратор</column>
+      <column name="username">admin@vcs.cit.rt</column>
+      <column name="password">$2a$11$/S65vdXlMt0BtEzHpMtdKOTvKZP9TZ4XUlWGGs8z.9M1RbeRwrWye</column>
+    </insert>
+  </changeSet>
 </databaseChangeLog>
